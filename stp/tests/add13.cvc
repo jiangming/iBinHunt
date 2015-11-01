@@ -1,0 +1,11 @@
+%% Regression level = 0
+%% Result = Valid
+%% Runtime = 1
+%% Language = presentation
+
+x : BITVECTOR(32);
+y : BITVECTOR(32);
+z : BITVECTOR(32);
+QUERY( BVSUB(32, BVUMINUS(x), 0bin00000000000000000000000000000001) = ~x);
+
+

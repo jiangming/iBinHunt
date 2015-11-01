@@ -1,0 +1,76 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{djb}[2005/09/07 David Brumley's Style File - Based on
+  Boaz Barak's Style File]
+
+
+%% Options available to package, along with default values.
+\def\Draft{0}
+\def\IsPDF{1}
+\DeclareOption{draft}{\def\Draft{1}}
+\DeclareOption{nopdf}{\def\IsPDF{0}}
+%% Execute the options in the declared, comma-separated order
+\ExecuteOptions{draft,nopdf}
+\ProcessOptions
+
+%% Standard packages
+\RequirePackage{times,epsfig,pifont}
+\RequirePackage{xspace,fullpage,amsfonts,amsmath,amssymb}
+\RequirePackage{code,fancyhdr,proof,array,cite,ulem}
+
+% Make the extra row height in array
+\setlength\extrarowheight{4pt}
+
+\ifnum\Draft=1
+\newcommand{\authnote}[2]{
+  \marginpar[]{
+    \footnotesize{\raggedright [#1 : #2]}}}
+\else
+\newcommand{\authnote}[2]{}
+\fi
+
+
+\newcommand{\david}[1]{{\authnote{david}{#1}}}
+\newcommand{\jim}[1]{{\authnote{jim}{#1}}}
+\newcommand{\dawn}[1]{{\authnote{dawn}{#1}}}
+\newcommand{\ignore}[1]{}
+
+% Formatting
+\raggedbottom
+\newcommand{\squish}{
+      \setlength{\topsep}{0pt}
+      \setlength{\itemsep}{0ex}
+      \vspace{-1ex}
+      \setlength{\parskip}{0pt}}
+
+
+\ifnum\IsPDF=1
+\RequirePackage[pdftex,colorlinks,linkcolor=blue,filecolor = blue,
+  citecolor = blue, urlcolor  = blue]{hyperref}
+\newcommand{\namedref}[2]{\hyperref[#2]{#1~\ref*{#2}}}
+\pdfbookmark[1]{Table of contents}{tabOfCont}
+\else
+\RequirePackage[colorlinks,linkcolor=blue,filecolor = blue, citecolor
+  = blue, urlcolor  = blue]{hyperref}
+\newcommand{\namedref}[2]{\hyperref[#2]{#1~\ref*{#2}}}
+\fi
+
+
+\newtheorem{theorem}{Theorem}[section]
+
+\newenvironment{proof}{\trivlist \item[\hskip \labelsep{\bf
+Proof:}]}{\hfill$\Box$ \endtrivlist}
+
+%% \lstset{
+%% language=[GNU]{C++},
+%% alsolanguage=[x86masm]{Assembler},
+%% basicstyle={\small},
+%% numbers=none,
+%% keywordstyle={},
+%% breaklines=true,
+%% breakautoindent=true,
+%% xleftmargin=2em,
+%% frame={},
+%% %stringstyle={\rmfamily},
+%% commentstyle={\rmfamily}
+%% }
+

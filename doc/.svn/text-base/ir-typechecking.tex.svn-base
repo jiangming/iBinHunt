@@ -1,0 +1,400 @@
+\subsubsection{\vine Typechecking}
+
+All \vine IR statements are typechecked.  Our typing contexts and
+types are as follows:\\
+\begin{tabular}{llllp{4in}}
+{\it Attributes}&$\alpha$&::=&const $|$ string \\
+{\it Types} &$\tau$&::=& reg1\_t $|$ reg8\_t $|$ reg16\_t $|$ reg32\_t
+$|$ reg64\_t  \\
+&&& $|$ string\_t $|$ addr\_t $|$  void $|$ $\tau_1$ [
+$\tau_2$ ] $|$ \Tattr{\alpha}\\
+{\it Functions}&$\Sigma$&::=&$\cdot$ $|$ $\Sigma$,(x:$\tau$;
+[$p_1$:$\tau_1$,..., $p_n$:$\tau_n$])\\
+{\it Variables}&$\Gamma$&::=&$\cdot$ $|$ $\Gamma$,x:$\tau$\\
+{\it Labels}&$\Labels$&::=&$\cdot$ $|$ $\Labels$, x:$d$\\
+\end{tabular}
+\\
+
+
+We use the following conventions:\\
+\begin{tabular}{ll}
+{\bf Symbol} & {\bf Meaning}\\\hline
+$\Gamma$ & Our variable typing context.\\
+$\Sigma$ & Our function typing context.\\
+$\Omega$ & Our current return type.\\ 
+$\Labels$ & Our current label context.\\
+$\bar{\Gamma}(x)$ & $x$ is free in the variable context $\Gamma$.\\
+$\bar{\Sigma}(x)$ & $x$ is free in the function context $\Sigma$.\\
+$\bar{\Labels}(x)$ & $x$ is free in the label context $\Labels$.\\
+$\vdash \Gamma {\it \ VCon}$ & $\Gamma$ is a valid variable context.\\
+$\vdash \Sigma {\it \ SCon}$ & $\Sigma$ is a valid function context.\\
+$\vdash \Labels {\it \ LCon}$ & $\Labels$ is a valid label context.\\
+\hline
+\end{tabular}\\
+
+Our function context $\Sigma$ binds a function name to its type. Our
+variable context $\Gamma$ binds a variable name to its declared type.
+The purpose of the function and variable context is to ensure
+consistency among declarations, e.g., variables should be declared
+before use and variables should not be redeclared with a new type.
+
+The purpose of the label context $\Labels$ is to ensure that 1) all
+direct jumps are to well-defined labels 2) jumps targets in the global
+space are only to global labels, e.g., no jumping to the middle of a
+function, and 3) that jumps targets inside a function are to labels
+within the function, e.g., no jumps outside the function.  The label
+context $\Labels$ binds a label named to one of three states: defined
+but not referenced \text{d}, referenced but not defined state
+\text{r}, or a referenced and defined state \text{dr}.  While the
+
+The purpose of the return type context $\Omega$ is to keep track of
+the current return type for a function.  
+
+A typing rule is of the form:
+\[
+\infer[]{\textit{Context} \vdash \textit{Foo} :
+\textit{Bar}}{\textit{premise 1} & \textit{premise 2} & ... &
+\textit{premise n}}
+\]
+and is read from bottom to top in the following way: {\it Context}
+tells us {\it Foo} is of type {\it Bar} {\bf when} {\it premise 1}
+{\bf and} {\it premise 2} {\bf and} ... {\it premise n} are true. If
+any of the premises is not true, then we cannot conclude anything, and
+typechecking fails.
+
+\noindent{\bf Auxiliary Predicates}: We first define auxiliary predicates for type compatability
+($\Tcompat{a}{b}$), integer types ($\Tint{\tau}$), and valid types
+($\Tvalid{\tau}$). \\
+
+\[
+\indent \infer[]{\vdash \Tint{\tau}}{\tau \in \{\Treg{1}, \Treg{8}, \Treg{16},
+\Treg{32}, \Treg{64},  \Taddr{} \}}
+\indent
+\infer[]{\vdash \Tcompat{\tau_1^{\alpha_1}}{\tau_2^{\alpha_2}}}{\vdash
+\Tcompat{\tau_1}{\tau_2}}
+\]
+
+\[
+\indent \infer[]{\vdash \Tcompat{\Taddr}{\Treg{32}}}{}
+\indent \infer[]{\vdash \Tcompat{\tau}{\tau}}{}
+\indent \infer[]{\vdash \Tvalid{\tau}}{\text{$\tau$ is a type}}
+\]
+
+We also define an auxiliary predicate that all labels referenced are
+also defined:
+\[
+\indent \infer[]{\vdash \Ldef{\Labels}}{\forall \ell \in \Labels:
+ \Labels \not\vdash \ell:r}
+\]
+
+\noindent{\bf Expression Types}: In this step we typecheck
+expressions. For Name's, we return void and extend the label
+context. As we will see, when typechecking a function, we create an
+empty label context, typecheck the function body, then make sure all
+labels referenced are also defined. Similarly, we use a unique label
+context for typechecking the global space.\\
+
+\[
+\indent \infer[]{ \vdash
+\text{Constant}(\tau,\text{Int(x)}):\tau}{\Tint{\tau}}
+\indent \infer[]{\vdash
+\text{Constant}(\Taddr,\text{Int(x)}):\Taddr}{}
+\]
+\[
+\indent \infer[]{ \Labels;\Gamma \vdash
+\text{Constant}(\Tstring,\text{String(x)}):\Tstring}{}
+\indent \infer[]{ \Labels;\Gamma \vdash \text{Lval}(x):\tau}{ \Gamma \vdash
+x:\tau}
+\]
+\[
+\indent 
+\infer[]{ \Labels;\Gamma \vdash \text{UnOp}(\circ,t_1) : \tau}
+{ \Labels;\Gamma \vdash t_1 : \tau & \Tint{\tau} & \circ \in \text{unop\_type}}
+\indent \text{No rule for Unknown}%\infer[]{\text\Labels;\Gamma \vdash \text{Unknown}(x) :\bot}{}
+\]
+\[
+\indent \infer[]{\Labels;\Gamma \vdash \text{BinOp}(\circ,t_1, t_2):\tau} 
+{\Labels;\Gamma \vdash t_1:\tau_1 &  \Labels;\Gamma \vdash t_2:\tau_2  
+& \Tint{\tau_1} &  \Tcompat{\tau_1}{\tau_2} & \circ \in
+\text{arith\_bops}}
+\]
+\[
+\indent
+\infer[]{\Labels;\Gamma \vdash \text{BinOp}(\circ,t_1, t_2) : \bool}
+{\Labels;\Gamma \vdash t_1 :\tau_1 &  \Labels;\Gamma \vdash t_2:\tau_2 & \Tint{\tau_1} &
+\Tcompat{\tau_1}{\tau_2}& {\circ \in \text{rel\_bops}} }
+\]
+% Let
+\[
+\indent \infer[]{\Labels;\Gamma \vdash \text{Let}(lv, e_1, e_2) : \tau}
+{ \Gamma \vdash lv : \tau_1 & \Labels;\Gamma \vdash e_1 : \tau_2 &
+\Tcompat{\tau_1}{\tau_2} & \Gamma \vdash
+\Gamma,lv:\tau_1 {\it \ VCons} & \Labels;\Gamma,lv:\tau_1
+\vdash e_2 : \tau}
+\]
+% Names, Cast
+\[
+\indent \infer[]{\Labels;\Gamma \vdash \text{Cast}(ct, \tau, e) :
+\tau}{\Labels;\Gamma \vdash e : \tau_1} 
+\indent \infer[]{\Labels;\Gamma \vdash \text{Name}(\ell) : \Taddr}
+{ \Labels \vdash \ell:d}
+\]
+
+\noindent{\bf L-Values}:\\
+\[
+\indent \infer[]{\Labels;\Gamma \vdash \text{Temp}(x,\tau):\tau}{\Gamma \vdash
+x:\tau}
+\indent \infer[]{\Labels;\Gamma \vdash \text{Mem}(x, \tau_1[\tau_2],
+e) : \tau_1} {\Labels;\Gamma \vdash e : \tau_2 & \Gamma \vdash x:\tau_1[\tau_2]}
+\]
+
+
+\noindent{\bf Extensions to Contexts}: 
+Statements may extend our context.  Each extension must be checked for
+consistency, e.g., a variable is not redeclared with a new type in the
+same scope. We do variables to be redeclared in the same context
+(i.e., shadowed) as long as the type is the same. Functions cannot be
+redefined, but may be redeclared any number of times.  We define valid
+extensions to our context as follows:
+
+%% Variable extensions
+\[
+\indent \infer[]{\Gamma \vdash \cdot {\it \ VCon}}{}
+\indent \infer[]{\Gamma \vdash \Gamma,x:\tau {\it \ VCon}}{\Gamma(x) \vdash \tau}
+\indent \infer[]{\Gamma \vdash \Gamma,x:\tau {\it \ VCon}}{\Gamma(x) \vdash
+\bar{\Gamma}(x)}
+\]
+
+%% Function Contexts
+\[
+\indent \infer[]{\Sigma \vdash \cdot {\it \ SCon}}{}
+\indent \infer[]{\Sigma \vdash \Sigma,
+      (f;\tau_r;\bool;p_1:\tau_1,p_2:\tau_2,...,p_n:\tau_n) {\it \ SCon}}
+{\Sigma \vdash \bar{\Sigma}(f) & \Tvalid{\tau_r} & \forall i:
+\Gamma \vdash p_i : \tau_i} 
+\]
+
+
+%% Labels context
+\[
+\indent \infer[]{\Labels \vdash \cdot {\it \ LCon}}{}
+\indent \infer[]{\Labels \vdash \Labels,\ell:\text{d} {\it \ LCon}}{\Labels
+\vdash \bar{\Labels}(\ell)}
+\indent \infer[]{\Labels \vdash \Labels,\ell:\text{d} {\it \ LCon}}{\Labels
+\vdash \ell:\text{d}}
+\]
+\[
+\indent \infer[]{\Labels \vdash \Labels,\ell:\text{r} {\it \ LCon}}{\Labels 
+\vdash \bar{\Labels}(\ell)}
+\indent \infer[]{\Labels,\ell:d \vdash \Labels,\ell:\text{rd} {\it \ LCon}}{}
+\]
+
+\noindent{\bf Statements}:
+Statements are valid if they have type \Tvoid.  In the following
+rules, we use ``decls::stmts'' to describe a list of declarations
+followed by a list of statements, with list elements separated by a
+semi-colon ``;'', and ``$\cdot$'' to denote the empty list.\\
+
+%% Block
+\[
+\indent 
+\infer[]{\Sigma;\Omega;\Labels;\Gamma \vdash
+\text{Block}(\text{decls}::\text{stmts}) : \Tvoid}
+{\Sigma,\Omega, \Labels;\Gamma \vdash \text{decls}::\text{stmts} : \Tvoid}
+\indent \infer[]{\Sigma;\Omega;\Labels;\Gamma \vdash
+x:\tau;\text{decls}::\text{stmts} : \Tvoid}
+{\Gamma \vdash \Gamma,x:\tau {\it \ VCon} &
+\Sigma,\Omega, \Labels;\Gamma,x:\tau \vdash \text{decls}::\text{stmts} :\Tvoid}
+\]
+\[
+\indent \infer[]{\Sigma;\Omega;\Labels;\Gamma \vdash \cdot::s;\text{stmts} : \Tvoid}
+{\Sigma;\Omega;\Labels,\Gamma \vdash s : \tau_1 & \Sigma, \Omega, \Gamma \vdash \text{stmts} :\Tvoid}
+\]
+%% Jmp
+\[
+\indent 
+\infer[]{\Sigma;\Omega;\Labels;\Gamma \vdash \text{Jmp}(e) : \Tvoid}{
+\Labels;\Gamma \vdash e : \Taddr}
+\]
+% CJmp
+\[
+\indent 
+\infer[]{\Sigma;\Omega;\Labels,\Gamma \vdash \text{CJmp}(e,e_t, e_f) : \Tvoid}{
+\Gamma \vdash e : \bool & \Labels;\Gamma \vdash e_t : \Taddr &
+\Labels;\Gamma \vdash e_f : \Taddr}
+\]
+% Move
+\[
+\indent \infer[]{\Sigma;\Omega;\Labels,\Gamma \vdash \text{Move}(l, e) :
+\Tvoid}
+{\Gamma \vdash l : \tau_1 & \Labels;\Gamma \vdash e : \tau_2 &
+\Tcompat{\tau_1}{\tau_2}}
+\]
+% Label
+\[
+\indent \infer[]{\Sigma;\Omega;\Labels,\Gamma \vdash \text{Label}(\ell) :
+\Tvoid, \Labels,\ell:d {\it \ LCon}}{\Labels \vdash \bar{\Labels}(\ell)}
+\indent \infer[]{\Sigma;\Omega;\Labels,\Gamma \vdash \text{Label}(\ell) :
+\Tvoid, \Labels,\ell:rd {\it \ LCon}}{\Labels \vdash \ell:r}
+\]
+% Special, ExpStmt
+\[
+\infer[]{\Sigma;\Omega;\Labels;\Gamma \vdash \text{Special}(x) : \Tvoid}{}
+\infer[]{\Sigma;\Omega;\Labels;\Gamma \vdash \text{ExpStmt}(x) :
+\Tvoid}
+{\Labels;\Gamma \vdash x : \tau}
+\]
+% Attr, Call(None,...)
+\[
+\indent \infer[]{\Sigma;\Omega;\Labels;\Gamma \vdash \text{Attr}(a,x) :
+\Tvoid}{\Sigma;\Omega;\Labels;\Gamma \vdash x : \tau}
+\indent \infer[]{\Sigma;\Omega;\Labels;\Gamma \vdash
+\text{Call}(\text{None}, x, e_1, e_2, ..., e_n) \vdash \Tvoid}
+{ \Sigma \vdash x : (x:\Tvoid, \tau_1, \tau_2,
+... \tau_n) & \forall n: \Labels;\Gamma \vdash e_n : \tau_n}
+\]
+% Call(Some(e),...)
+\[
+\indent \infer[]{\Sigma;\Omega;\Labels;\Gamma \vdash
+\text{Call}(\text{Some}(l), x, e_1, e_2, ..., e_n) \vdash \Tvoid}
+{\Gamma \vdash l : \tau & \Sigma \vdash x : (x:\tau_r, \tau_1, \tau_2,
+... \tau_n) & \Tcompat{\tau}{\tau_r} & \forall n: \Labels;\Gamma \vdash e_n : \tau_n}
+\]
+% return(Some(e)), return(None)
+\[
+\indent \infer[]{\Sigma;\Omega;\Labels;\Gamma \vdash
+\text{Return}(\text{Some}(e))}{\Labels;\Gamma \vdash e : \tau &
+\Omega \vdash \tau}
+\indent \infer[]{\Sigma;\Omega;\Labels;\Gamma \vdash
+\text{Return}(\text{None})}{\Omega \vdash  \Tvoid}
+\]
+
+\noindent{\bf Functions}: Although functions are a type of statement,
+we only allow functions in the global scope.  For ease of writing, we
+have eliminated the scoping context from rules, treating this as a
+side condition.\\
+
+Typechecking function definitions may look complicated, but hopefully
+each step makes sense. We 
+\begin{enumerate}\squish
+\item As a side condition, verify we are in the global scope.
+\item Extend $\Sigma$ with the function type (i.e., the definition is
+also a declaration). 
+\item Extend $\Gamma$ with the formal parameters since they are local
+variables.
+\item Create an empty label context  $\Labels' := \cdot$.  
+\item Create an empty return context $\Omega := \cdot$.
+\item Typecheck the function body.
+\item Check if the return type is the declared return type.
+\item Check if all labels referenced are also defined $\Ldef{\Labels}$.
+\end{enumerate}
+% Function defintions
+\[
+\indent \infer[]{\Sigma;\Omega;\Labels;\Gamma \vdash
+\text{Function}(x, \tau_r, p_1:\tau_1, p_2:\tau_2, ..., p_n:\tau_n ,
+\false, \text{Block}(s)) : \Tvoid}
+{ ^{\textstyle \text{scope} = 0; \Sigma \vdash
+  \Sigma,(x:\tau_r;\false;p_1:\tau_1,...,p_2:\tau_n) {\it \ SCon}} _
+  {\textstyle \quad \forall n: \Gamma \vdash \Gamma,p_1:\tau_n {\it \
+  VCon} ;
+  \Labels' := \text{Labels} \in s;
+  \Omega := \tau_r ; 
+  \Omega, \Labels', \Gamma \vdash \text{Block}(s) : \Tvoid ;
+  \Ldef{\Labels'}}}
+\]
+
+Function declarations are much simplier: we just need to verify the
+function type is well-formed. We do this for both external (when the
+second-to-last parameter is \true), and for local functions (when the
+second-to-last parameter is \false).
+% Function declarations
+\[
+\indent \infer[]{\Sigma;\Omega;\Labels;\Gamma \vdash
+\text{Function}(x, \tau_r, p_1:\tau_1, p_2:\tau_2, ..., p_n:\tau_n ,
+\true, \text{None}) : \Tvoid}
+{\Sigma \vdash \Sigma,(x:\tau_r;\true;p_1:\tau_1,...,p_2:\tau_n) {\it \
+SCon} & \forall n: \Gamma \vdash \Gamma,p_1:\tau_n {\it \ VCon} &
+\text{scope} = 0}
+\]
+\[
+\indent \infer[]{\Sigma;\Omega;\Labels;\Gamma \vdash
+\text{Function}(x, \tau_r, p_1:\tau_1, p_2:\tau_2, ..., p_n:\tau_n ,
+\false, \text{None}) : \Tvoid}
+{\Sigma \vdash \Sigma,(x:\tau_r;\false;p_1:\tau_1,...,p_2:\tau_n) {\it \
+SCon} & \forall n: \Gamma \vdash \Gamma,p_1:\tau_n {\it \ VCon} &
+\text{scope} = 0}
+\]
+
+\noindent{\bf Typechecking a program}: To typecheck a program = stmt list,
+we
+\begin{enumerate}\squish
+\item  Initialize $\Sigma$, $\Gamma$, $\Omega$, and $\Labels$ to the empty
+set
+\item Build a label context  $\Labels$ for all defined labels in each
+scope.  These rules are not shown, but essentially each function will
+have its own label context, as well as the global scope.  The label
+contexts for the global and each function scope are disjoint.
+\item Iterate over all statements and typecheck using the
+above rules.
+\end{enumerate}
+
+In practice, the last two steps can be combined in the typechecking
+implementation.
+
+%% \[
+%% \infer[]{\Sigma,\Omega,\Gamma \vdash \text{Block}(\text{x:\tau,decl ::stmts}):\tau_2} 
+%% {\Gamma \vdash \Gamma,x:\tau & \Sigma,\Omega,\Gamma \vdash }
+%% \]
+
+%% \[
+%% \infer[]{\Sigma, \Gamma \vdash 
+%% \]
+
+
+%% \noindent{\bf Valid Context Extension}:\\
+
+%% We define valid context extensions.  
+
+
+%% %
+
+
+%% We assume in subsequent rules any extension to the context is valid.
+
+
+
+
+%% In order to typecheck l-values, we define valid extensions to the
+%% context. Note we allow shadowing, but only when the shadowed variable
+%% is of the same type.
+%% \[
+%% \indent \infer[]{\Gamma \vdash \cdot {\it \ VCon}}{}
+%% \indent \infer[]{\Gamma \vdash \Gamma,x:\tau {\it \ VCon}}{\Gamma(x) : \tau}
+%% \indent \infer[]{\Gamma \vdash \Gamma,x:\tau {\it \ VCon}}{\Gamma(x) :
+%% \bar{\Gamma}(x)}
+%% \]
+
+%% We then typecheck, making sure the extension is valid. 
+
+%% \\
+%% {\bf Statement Types:}
+%% \[
+%% \setlength\extrarowheight{15pt}
+%% \begin{array}{cc}
+%% \infer[\textsc{t-jmp}]{\Gamma \vdash \text{Jmp}(e) : ()}
+%% { \Gamma \vdash e : \text{Name} \vee e : address\_t} &
+%% \infer[\textsc{t-cjmp}]{\Gamma \vdash \text{CJmp}(e_1, e_2, e_3) : ()}
+%% {\Gamma \vdash e_1:\text{Bool} & \Gamma \vdash e_1, e_2  : address\_t} \\
+%% \infer[\textsc{t-move}]{\Gamma \vdash \text{Move}(e_1, e_2) :() }
+%% {\Gamma \vdash e_1 : LVal & \Gamma \vdash e_2 :
+%% \tau} &
+%% \infer[\textsc{t-special}]{\Gamma \vdash \text{Special}(e) :
+%% ()}{}\\
+%% \infer[\textsc{t-label}]{\Gamma \vdash \text{Label}(e) : ()}
+%% {\Gamma \vdash e:\text{string}} &
+%% \infer[\textsc{t-expstmt}]{\Gamma \vdash \text{ExpStmt}(e) : () }
+%% {\Gamma \vdash e:\tau} \\
+%% \infer[\textsc{t-comment}]{\Gamma \vdash \text{Comment}(e) : () }
+%% { \Gamma \vdash e : \text{string}}\\
+%% \end{array}
+%% \]

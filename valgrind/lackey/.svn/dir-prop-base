@@ -1,0 +1,13 @@
+K 10
+svn:ignore
+V 106
+.deps
+lackey-amd64-linux
+lackey-ppc32-linux
+lackey-ppc64-linux
+lackey-x86-linux
+Makefile
+Makefile.in
+*.so
+
+END

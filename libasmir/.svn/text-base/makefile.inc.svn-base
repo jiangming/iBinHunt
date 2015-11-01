@@ -1,0 +1,4 @@
+VEX_DIR=/home/jiangming/bitblaze/valgrind/VEX
+LIBASMIR_CXXFLAGS=-I/home/jiangming/bitblaze/valgrind/VEX/pub -I/home/jiangming/bitblaze/vine-stable-0.6/src/include -g -O2
+LIBASMIR_LDFLAGS=-L/home/jiangming/bitblaze/valgrind/VEX -L/home/jiangming/bitblaze/vine-stable-0.6/src 
+LIBASMIR_LIBS=-lasmir -lvex -lbfd -liberty

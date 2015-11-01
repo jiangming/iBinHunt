@@ -1,0 +1,47 @@
+\begin{table}
+\begin{tabular}{lll}
+  stmt &::=& {\tt Jmp} of exp $|$ {\tt CJmp} of exp * exp * exp \\
+  & & $|$ {\tt Move} of lvalue * exp  $|$ {\tt Special} of string \\
+  & & $|$ {\tt Label} of label $|$ {\tt Block} of decl list * stmt list\\
+  & & $|$ {\tt ExpStmt} of exp $|$ {\tt Comment} of string  \\
+  & & $|$ {\tt Function} of label * type *  decl list * stmt \\
+  & & $|$ {\tt Return} of exp option $|$ {\tt Attr} of stmt * attribute\\
+  & & $|$ {\tt Call} of lvalue option  * label * exp list\\
+
+  exp &::=& {\tt BinOp} of  binop\_type * exp * exp
+  $|$ {\tt UnOp} of unop\_type * exp \\
+  & & $|${\tt Constant} of typ * value 
+  $|$ {\tt Name} of label \\
+  & & $|$ {\tt Phi} of var * exp list 
+  $|$ {\tt Cast} of cast\_type * typ * exp\\
+  & & $|$ {\tt Unknown} of string 
+  $|$ {\tt Lval} of lvalue \\
+  & & $|$ {\tt Let} of lvalue * exp * exp \\
+
+  lvalue &::=& {\tt Temp}  of var * typ 
+  $|$ {\tt Mem} of var * typ * exp \\
+
+  binop\_type &::=& arith\_bops $|$ rel\_bops \\
+  arith\_bops&::=& PLUS ($+$) $|$ MINUS ($-$) $|$ TIMES ($*$) $|$ DIVIDE
+  ($/$)  $|$ SDIVIDE ($/\$$) $|$ MOD ($\%$) \\
+  & & $|$ LSHIFT ($\ll$) $|$ RSHIFT ($\gg$) $|$ ARSHIFT ($@\gg$) 
+   $|$ AND ($\&$) $|$ OR ($|$) $|$ XOR (\^{}) \\
+  rel\_bops&::=&  EQ $(==)$ $|$ NEQ $(<>)$ $|$ $|$ LT ($<$) $|$
+  SLE ($<=\$$) $|$ SLT ($<\$$) \\
+  unop\_type&::=& NEG ($-$) $|$ NOT ($!$)\\
+
+  typ&:==& REG\_64 $|$ REG\_32 $|$ REG\_16 $|$ REG\_8 $|$ REG\_1 $|$ {\tt Array} of typ * typ $|$ String $|$ Void\\
+
+  cast\_type&::=&CAST\_UNSIGNED $|$ CAST\_SIGNED $|$ CAST\_HIGH $|$
+  CAST\_LOW \\
+  & & $|$ CAST\_FLOAT $|$ CAST\_INTEGER $|$ CAST\_RFLOAT $|$
+  CAST\_RINTEGER \\
+
+  decl&::=& var * typ\\
+  var&::=& string \\
+  label&::=& string 
+ 
+\end{tabular}
+\caption{Our IR Constructors}
+\label{fig:irtypes}
+\end{table}

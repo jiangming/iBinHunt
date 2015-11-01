@@ -1,0 +1,13 @@
+K 10
+svn:ignore
+V 114
+.deps
+helgrind-amd64-linux
+helgrind-ppc32-linux
+helgrind-ppc64-linux
+helgrind-x86-linux
+Makefile
+Makefile.in
+*.so
+
+END

@@ -1,0 +1,44 @@
+K 13
+svn:externals
+V 37
+VEX svn://svn.valgrind.org/vex/trunk
+
+K 10
+svn:ignore
+V 391
+acinclude.m4
+aclocal.m4
+autom4te-*.cache
+autom4te.cache
+bin
+cachegrind
+cachegrind.out.*
+compile
+config.guess
+config.h*
+config.log
+config.status
+config.sub
+configure
+default.supp
+depcomp
+include
+.in_place
+install-sh
+lib
+Makefile
+Makefile.in
+missing
+mkinstalldirs
+share
+stamp-h*
+svn-commit.tmp
+svn-commit.2.tmp
+valgrind
+valgrind.pc
+valgrind.spec
+valt_load_address*.lds
+vg_annotate
+vg_cachegen
+
+END

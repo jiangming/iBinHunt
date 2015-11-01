@@ -1,0 +1,215 @@
+\section{Disassembly}
+
+Disassembly consists of two steps:
+\begin{enumerate}
+  \item Parsing the file format and locating code segments.
+  \item Disassembling each code segment into a sequence of x86
+  instructions.
+\end{enumerate}
+
+The relevant files for this step are contained in {\tt
+  libasmir/src/disasm}.  In particular, {\tt asm\_program.cpp} contains
+  most of the high-level interfaces we use, while other files contain
+  lower-level interfaces.  Also, note some of the code is taken from
+  {\tt objdump.c} in binutils, which is a good starting point for
+  those interested at more depth.
+
+\subsection{Locating Code Segments}
+
+We use the GNU BFD library~\cite{misc:bfd} for reading in an executable. BFD
+supports object files, though our code currently does not.  I first
+give a high level description of ELF, then describe  BFD sections.
+Although Windows uses a different file format (PE --- Portable
+Executable), at a high level the same discussion is relevant.
+
+
+\paragraph{ELF}
+Every ELF begins with an ELF header.  The header contains information
+such as the architecture, whether it is an executable or object file,
+the programs start address, a {\it program header structure} and a
+{\it section header table}, etc.  In addition, it contains the
+sections that make up the program. Almost everything interesting is
+within the sections. 
+
+The section header table focuses on identifying the various parts of
+the program are within the ELF file.  The program header describes
+where and how these parts are loaded into memory.  The section header
+table is for use by the compiler and linker, while the program header
+table is for use by the program loader.  The program header is
+optional for object files. The section header table is optional for
+an executable~\cite{misc:tinyelf}.
+
+
+Each section is an Elf32\_Shdr structure.  Important sections include:
+\begin{itemize}
+\item {\tt .bss}  Holds uninitialized data of the program. Initialized to
+  all zero's when the process starts up.
+\item {\tt .data \& .data1}  Hold initialized data.
+\item {\tt .dynamic}  Holds dynamic linking information.
+\item {\tt .hash} Holds the symbol hash table.
+\item {\tt .rodata \& .rodata2}  Contain read-only data. GCC puts strings
+  constants and constant floating points here.
+\item {\tt .symtab} Holds the symbol table, if present.
+\item {\tt .text} The executable instructions of the program.
+\item {\tt .init} Initialization functions. executed upon load.
+\item {\tt .fini} Like .init.
+
+\end{itemize}
+
+
+\paragraph{BFD}
+
+BFD provides an abstract interface to executables. BFD is also used by
+the linux programs {\tt readelf} and {\tt objdump}. These programs are
+very useful when trying to untangle an executable, though often assume
+an executable was produced by a compiler.  An executable consists of
+header data, optional symbol table, and zero or more sections. 
+
+Each section is marked with a type, and an optional name. The type may
+be used by the OS when loading the file, e.g., a {\tt SEC\_DATA} (data
+segment) may be marked read-only.  Example section types include:
+\begin{itemize}
+  \item {\tt SEC\_CODE} The code segment, i.e., a segment marked as
+  containing executable code.  The {\tt .text} section is an example
+  of a {\tt SEC\_CODE}.
+  \item {\tt SEC\_RELOC} Relocable code.  We do not process relocable
+  code.
+  \item {\tt SEC\_DATA} A section containing read-only data.  
+    \item {\tt SEC\_NOFLAGS} No information is available.
+\end{itemize}
+
+\subsection{Disassembling Each Code Segment}
+
+Our disassembler is based upon Kruegel {\it et. al.}'s
+disassembler~\cite{kruegel_disassemble:2004} operating in linear sweep
+mode.  The linear sweep algorithm is given in the following
+psuedo-code:
+\begin{code}
+offset = 0;
+while(offset < section\_length){
+  inst = blob + offset;
+  offset = inst->length;
+}
+\end{code}
+This loop is intended to simulate the instruction decode-execute loop
+that the processor uses when executing the program (see wikipedia's
+entry on ``Von Neumann Architecture'' for more information on this
+sort of loop). However, we are performing this statically, while the
+processor does it dynamically and thus has more information. For most
+executables, this loop works fine, though it is worth noting other
+algorithms such as the recursive traversal algorithm can produce more
+accurate results~\cite{kruegel_disassemble:2004}.
+
+
+At a high level, the input to disassembly is a section with symbol
+table, and the output is a {\tt asm\_program\_t}, which consists of an
+{\tt asm\_function\_t} for each function disassembled. The
+instruction, along with its disassembly, can be found in {\tt
+  asm\_function\_t}. 
+
+\paragraph{Symbol Tables}
+Although you could disassemble arbitrary byte sequences, we expect to
+only be disassembling functions.  We currently identify functions via
+the symbol table. The symbol table, as produced by a compiler,
+contains information about the executable.  For example, the start
+address of functions (though not the end address) is given in the
+symbol table.
+
+Each symbol is marked with a type by BFD, hinting at what the symbol
+is used for, such as:
+\begin{itemize}
+  \item {\tt BSF\_FUNCTION} indicates a function entry point. {\tt
+  BSF\_FUNCTION} is used by ELF, and maybe others.  
+  \item {\tt BSF\_GLOBAL} a global symbol. 
+  \item {\tt BSF\_LOCAL} a local symbol such as static in C.
+\end{itemize}
+
+
+We only disassemble {\tt BSF\_FUNCTION}'s.  Sometimes functions are not
+marked with {\tt BSF\_FUNCTION}, e.g., hand-generated assembly often
+omits this information.  If you wish to create hand-generated
+assembly, you must mark each function with a ``.type''
+declaration. For example:
+\begin{verbatim}
+> cat hello.c
+ int main()
+ {
+   return 42;
+ }
+> gcc -S hello.c /* The -S flag generates assembly and stop */
+> cat hello.s
+...
+.globl main
+        .type   main, @function
+main:
+...
+\end{verbatim}
+
+\subsection{Disassembly to IR}
+
+The output of the disassembly phase is an {\tt asm\_program\_t}, which
+consists primarily of a list of {\tt asm\_function\_t}'s for each
+function in the executable.  {\tt asm\_function\_t}'s are sequentially
+processed and converted into the IR, as discussed in the next section.
+
+
+\subsection{Future Directions}
+
+Our current disassembler has been well-tested for code generated by
+gcc.  Our future direction is to allow the user to plug in other
+disassemblers. The idea is:
+\begin{itemize}
+  \item A disassembler disassembles the file and produces a set of
+  instruction addresses and function entry/exit points.
+  \item Optionally, self-decrypting binaries would require passing in
+    the actual byte array to our infrastructure. See {\tt
+    libasmir/ir/ir\_program.cpp:asm\_insn\_to\_ir()} for an example.
+  \item The instruction addresses and entry/exit points are given to
+  libasmir, along with the executable. The output is again {\tt
+  asm\_function\_t}'s. 
+\end{itemize}
+The output  {\tt asm\_function\_t}'s are then used by the rest of the
+infrastructure, exactly as with our current infrastructure.
+
+
+Note: There is currently (10/13/2006) a master's student working on
+this interface with IDA pro.
+
+
+
+\subsection{Notes}
+
+\begin{itemize}
+  \item We currently have a hack to disassemble executables without a
+  symbol table by doing a linear disassembly of the entire section and
+  returning a single {\tt asm\_function\_t} for all instructions in
+  the section.
+
+
+\item Separating code from data has been shown to be reducible to the
+halting problem. Thus, disassembly itself is reducible to the halting
+problem. Therefore, there will always be limitations to any
+disassembler.
+
+\item It is quite common for a 1 line C program to be disassembly to
+  be tens of thousands of lines long. The central reason is standard
+  libraries for loading, dealing with possible errors, and dealing
+  with global definitions are quite large, and included in every
+  executable. For example:
+\begin{code}
+  void main(){  return 42; }
+\end{code}
+ results in an executable about 4000 bytes long. See \emph{A Whirlwind
+ Tutorial on Creating Really Teensy ELF Executables for
+ Linux}~\cite{misc:tinyelf} for more information on how to make such a
+ program much smaller.
+
+\item We provide some interfaces for disassembling and converting to
+  the IR instruction(s) named by an instruction address (or address
+  list) in {\tt ir\_program.h}. However, we do not provide an
+  interface for just disassembling instructions as named by an address
+  list.  A starting point would be to look at
+  {\tt ir\_program.cpp:asm\_insn\_to\_ir()}.
+
+\end{itemize}
+

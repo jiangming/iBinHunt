@@ -1,0 +1,8 @@
+\section{x86 Overview}
+
+\subsection{Calling Conventions}
+
+\begin{itemize}
+\item Chapter 6 of Volume 1 of the IA-32 Architecture Software Developer's
+manual is devoted to calling and returing~\cite{x86:vol1}.
+\end{itemize}

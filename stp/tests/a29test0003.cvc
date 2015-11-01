@@ -1,0 +1,12 @@
+%% Regression level = 3
+%% Result = InValid
+%% Language = presentation
+
+s: ARRAY BITVECTOR(32) OF BITVECTOR(8);
+%----------------------------------------------------
+ASSERT NOT NOT ((s[0bin00000000000000000000000000000000])
+         [4:0] = 0bin00000);
+
+%----------------------------------------------------
+QUERY FALSE;
+COUNTEREXAMPLE;

@@ -1,0 +1,122 @@
+\subsection{\vine Abstract Syntax}
+
+\begin{table}
+\begin{tabular}{lll}
+program&::=&[stmt]*\\
+stmt&::=& {\bf jmp(} exp {\bf);} $|$ {\bf cjmp(} exp{\bf,} exp{\bf,} exp {\bf);} $|$ 
+ {\bf special(} string {\bf )} {\bf ;} $|$  {\bf label} id {\bf :} \\
+& &  $|$ simplestmt {\bf ;} $|$  fundecl {\bf ;} $|$ vardecl {\bf ;} $|$ fundefn 
+ $|$ block $|$ {\bf ;}  \\
+simplestmt&::=& lval  {\bf =} exp $|$ exp $|$  {\bf return}
+exp $|$ {\bf return} $|$ lval = id {\bf (} args {\bf )} \\
+fundefn&::=&typ id {\bf (} formals {\bf )} block\\
+fundecl&::=& [{\bf extern}]? typ id {\bf (} formals {\bf );}  \\
+formals&::=& $\epsilon$ $|$ id{\bf:}typ [{\bf ,} id{\bf :}typ]*\\
+vardecl&::=& {\bf var} id [{\bf ,} id]* {\bf :} typ\\
+block&::=& {\bf \{} [stmt]* {\bf \}} \\
+lval&::=&  exp {\bf [} exp {\bf ]} $|$ {\bf (} lval
+{\bf )} $|$  id $|$ lval {\bf :} typ  \\
+exp&::=& {\bf (} exp {\bf )} $|$ exp binop exp $|$ unop exp $|$ const
+$|$ {\bf unknown} string $|$ {\bf name(}id{\bf)} \\
+& & $|$ lval $|$ {\bf let} lval {\bf =} exp
+{\bf in} exp  $|$ {\bf cast (} exp {\bf )} cast\_typ {\bf :}  typ  \\
+args&::=& $\epsilon$ $|$ exp [{\bf ,} exp]*\\
+typ&::=& basetyp attrs $|$ typ attrs {\bf [} typ attrs {\bf
+]} $|$ typ attrs {\bf *} \\
+basetyp&::=&  {\bf \Treg{1}}  $|$ {\bf \Treg{8}}  $|$ {\bf \Treg{16}}   $|$ 
+{\bf \Treg{32}}  $|$ {\bf \Treg{64}} $|$ {\bf \Tvoid } $|$ {\bf \Tstring}
+$|$ {\bf \Taddr}\\
+cast\_typ&::=& {\bf U} $|$ {\bf Unsigned} $|$ {\bf S} $|$ {\bf Signed}
+$|$ {\bf H} $|$ {\bf High} $|$ {\bf L} $|$ {\bf Low} \\
+attrs&::=& $\epsilon$ $|$ {\bf \_attr\_(}id[,id]*{\bf )}\\
+binop&::=& arith\_bops $|$ rel\_ bops \\
+arith\_bops&::=&PLUS ($+$) $|$ MINUS ($-$) $|$ TIMES ($*$) $|$ DIVIDE
+  ($/$)  $|$ SDIVIDE ($/\$$) $|$ MOD ($\%$) \\
+  & & $|$ LSHIFT ($\ll$) $|$ RSHIFT ($\gg$) $|$ ARSHIFT ($@\gg$)
+   $|$ AND ($\&$) $|$ OR ($|$) $|$ XOR (\^{}) \\
+rel\_bops&::=&EQ $(==)$ $|$ NEQ $(<>)$ $|$ $|$ LT ($<$) $|$
+  SLE ($<=\$$) $|$ SLT ($<\$$) \\
+unop&::=& NEG ($-$) $|$ NOT ($!$)\\
+const&::=&[0-9][0-9]*{\bf :} typ $|$ string $|$ {\bf \true} $|$
+ {\bf \false} $|$ {\bf \Tnull} \\
+string&::=& {\bf ``} [any char except quote and newline]* {\bf ``}\\
+\end{tabular}
+
+\caption{\vine abstract syntax.}
+\label{tab:absgrammar}
+\end{table}
+
+
+
+The \vine abstract syntax is shown in
+Table~\ref{tab:absgrammar}. Items in bold are keywords in the \vine
+grammar.  This grammar is designed to make translation from assembly
+as easy as possible.  
+
+
+
+There are a couple of other things noteworthy about this grammar:
+\begin{itemize}\squish
+
+\item The declaration {\tt var x:t1[t2]} declares a map which takes in
+  a {\tt t2} and returns a {\tt t1}.  Maps are used to model memory. 
+
+  \item We allow casting when the translation {\it is\_strict}
+  variable is \false.  In this case, maps can be ``cast'' as a
+  different type by annotating it with the desired type. This is used
+  to allow otherwise broken code, such as:
+  \begin{code}
+    var mem:reg8\_t[reg32\_t];
+    var x:reg32\_t;
+    mem[2:reg8\_t] = x;
+  \end{code}
+  This code will not typecheck by default. However, when {\it
+  is\_strict} is false, we will translate code based upon a user
+  annotation such as:
+  \begin{code}
+    mem[2:reg8\_t]:reg32\_t[reg32\_t] = x;    
+  \end{code}
+  to 
+  \begin{code}
+    mem[2:reg8\_t] = byte0(x);    
+    mem[3:reg8\_t] = byte1(x);    
+    mem[4:reg8\_t] = byte2(x);    
+    mem[5:reg8\_t] = byte3(x);    
+  \end{code}  
+
+  The annotation is only valid if it specifies a smaller value type
+  (e.g., index types cannot be cast) of the array.
+
+\item The {\tt addr\_t} type denotes the memory address type on the
+  host machine.  Variables of type {\tt addr\_t} are used to implement
+  calls to external functions.
+
+\item We have a couple of derived forms, i.e., they are syntatic sugar for
+more complicated expressions. 
+\begin{tabular}{cc}
+$e_1$ & $e_2$ \\\hline
+\true & 1:reg1\_t\\
+\false & 0:reg1\_t\\
+\Tnull & 0:\Taddr\\
+\end{tabular}
+
+ 
+\item We currently only support basic integer operations.  In
+particular, we do not support floating point.
+
+\item All functions, even those ``built-in'', must be explicitly
+  declared. An example built-in function is {\tt addr\_t
+  alloc(reg32\_t x)}, which allocates  $x$ contiguous bytes of memory
+  on the host machine.  
+
+\end{itemize}
+
+As normal, some statements accepted by the abstract syntax are not
+well-formed.  The job of typechecking in our context is to check, as
+much as possible, that statements are well formed, i.e., the types
+make sense and that execution will not obviously ``get stuck''.
+
+\paragraph{GCC Pre-processing}
+We use gcc to pre-process \vine input programs written in the abstract
+syntax.  This allows users to use {\tt \#include} and {\tt \#define}.
+

@@ -1,0 +1,18 @@
+%% Regression level = 3
+%% Result = InValid
+%% Language = presentation
+
+a: ARRAY BITVECTOR(32) OF BITVECTOR(8);
+i: BITVECTOR(8);
+%----------------------------------------------------
+ASSERT (LET cvcl_0 = (0bin000000000000000000000000 
+               @ i)
+ IN (BVLE(0bin00000000000000000000000000000000
+          ,cvcl_0) AND BVLE(cvcl_0,0bin00000000000000000000000000001001)));
+ASSERT NOT (SX(a[(0bin000000000000000000000000 
+           @ i)],32) = 
+     0bin00000000000000000000000000001011);
+
+%----------------------------------------------------
+QUERY FALSE;
+COUNTEREXAMPLE;

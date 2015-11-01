@@ -1,0 +1,16 @@
+K 10
+svn:ignore
+V 79
+.deps
+Makefile
+Makefile.in
+fbench
+vg_perf
+ffbench
+bz2
+sarp
+bigcode
+tinycc
+heap
+
+END

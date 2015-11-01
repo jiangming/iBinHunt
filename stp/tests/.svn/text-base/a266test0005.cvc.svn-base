@@ -1,0 +1,14 @@
+%% Regression level = 3
+%% Result = InValid
+%% Language = presentation
+
+p: ARRAY BITVECTOR(32) OF BITVECTOR(8);
+%----------------------------------------------------
+ASSERT NOT (SX(0bin01001000,32) = SX(p[0bin00000000000000000000000000000000]
+                              ,32));
+ASSERT (SX(0bin01001100,32) = SX(p[0bin00000000000000000000000000000000]
+                          ,32));
+
+%----------------------------------------------------
+QUERY FALSE;
+COUNTEREXAMPLE;

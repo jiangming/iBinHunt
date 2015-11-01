@@ -1,0 +1,13 @@
+K 10
+svn:ignore
+V 98
+.deps
+Makefile
+Makefile.in
+none-amd64-linux
+none-ppc32-linux
+none-ppc64-linux
+none-x86-linux
+*.so
+
+END

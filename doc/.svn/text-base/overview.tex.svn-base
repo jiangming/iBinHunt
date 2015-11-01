@@ -1,0 +1,44 @@
+\section{Overview}
+
+The VinE project is geared towards analyzing security properties of
+executables.  Traditional software security research has been
+predicated on the availability of source code. Previous approach has
+focused on ensuring software security via the software developer, e.g,
+their choice of safe/unsafe language, implementation methodology,
+compile-time checks, source-code analysis, etc.
+
+
+Previous techniques implied that security is completely predicated on
+choices made by the developer.  This is insufficient for many reasons,
+including:
+\begin{itemize}
+  \item Most users of software do not have source code.  However,
+  different users may have different security needs. It is difficult
+  for a developer to come up with a balance of security vs. other
+  factors that is acceptable to all users. 
+  \item When time is of the essence, it may not be possible to involve
+  a developer to address security measures.  If a zero-day exploit is
+  released, it may be impractical to involve the developer in
+  security-critical revisions to the source code, compiler, etc. 
+\end{itemize}
+
+
+\paragraph{Architecture Overview}
+
+At a high level, the VinE architecture consists of:
+
+\begin{itemize}
+  \item A front-end disassembler. The disassembler is responsible for
+  translating a binary into assembly instructions.  
+  \item Intermediate Representation(s) (IR). An IR is an abstraction
+  geared at providing a unambiguous representation of the binary.  The
+  IR is semantically equivilant to the program, meaning executing the
+  IR on a properly defined machine should result in the same behavior
+  as executing the binary on a real machine.
+  \item Back-end analysis routines. Analysis is performed on the
+  IR. Example analysis include dead-code elimination, weakest
+  pre-condition computation, etc.
+  \item Applications.  Applications use the above components to
+  perform specific (research-oriented) tasks.
+\end{itemize}
+

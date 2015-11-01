@@ -1,0 +1,18 @@
+K 10
+svn:ignore
+V 126
+allok
+deadlock
+.deps
+inherit
+Makefile
+Makefile.in
+race
+race2
+readshared
+*.stderr.diff
+*.stderr.out
+*.stdout.diff
+*.stdout.out
+
+END

@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/vex
+END
+irtoir-i386.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/vex/irtoir-i386.cpp
+END
+vexmem.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/vex/vexmem.cpp
+END
+gen_thunks.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/vex/gen_thunks.cpp
+END
+irtoir-arm.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/vex/irtoir-arm.cpp
+END
+Notes
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/vex/Notes
+END
+irtoir.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/vex/irtoir.cpp
+END
+irtoir_c.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/vex/irtoir_c.cpp
+END
+vexir.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/vex/vexir.cpp
+END

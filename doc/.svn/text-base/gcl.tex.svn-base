@@ -1,0 +1,13 @@
+\begin{table}
+\begin{tabular}{ll}
+A, B, S $\in$ GCL stmt&::=  {\bf assert}(exp) \\
+& $|$ {\bf assume}(exp) \\
+& $|$ lv := exp (lv is a valid l-value) \\
+& $|$ A; B  \\
+& $|$ A $\Box$ B \\
+& $|$ {\bf skip}
+\end{tabular}
+\caption{The gaurded command language (left)}
+\label{tab:gcl}
+\end{table}
+

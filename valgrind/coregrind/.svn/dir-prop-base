@@ -1,0 +1,17 @@
+K 10
+svn:ignore
+V 124
+.deps
+Makefile
+Makefile.in
+*.a
+*.so
+stage2
+stage2.lds
+valgrind
+vg_intercept.c
+vg_replace_malloc.c
+vg_toolint.c
+vg_toolint.h
+
+END

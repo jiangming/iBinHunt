@@ -1,0 +1,25 @@
+%% Regression level = 1
+%% Result = Valid
+%% Runtime = 1
+%% Language = presentation
+x, y : BITVECTOR(2);
+X : BITVECTOR(16);
+z : BITVECTOR(16);
+v,u : BITVECTOR(32);
+min, max : BITVECTOR(32);
+
+ASSERT(X=0hex0f0f);
+ASSERT(z=0hex0010);
+ASSERT(v=BVUMINUS(0hex0000000f));
+ASSERT(u=0hex0000000f);
+ASSERT(min = 0hex0000000f);
+ASSERT(max = 0hex0000000f);
+
+%compute abs value of v
+%ECHO "COMPUTE ABS VALUE OF A NEG NUMBER";
+%QUERY(BVUMINUS(v) = 
+%      BVSUB(32, 
+%            BVXOR(v, ~((v >> 31)[31:1])@v[31:31]),  
+%	    ~((v >> 31)[31:1])@v[31:31]));
+
+QUERY(BVUMINUS(v) = BVSUB(32,BVXOR(v,SX(v[31:31],32)),SX(v[31:31],32)));

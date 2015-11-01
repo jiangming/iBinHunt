@@ -1,0 +1,16 @@
+K 10
+svn:ignore
+V 156
+.deps
+Makefile
+Makefile.in
+callgrind-amd64-linux
+callgrind-ppc32-linux
+callgrind-ppc64-linux
+callgrind-x86-linux
+*.so
+callgrind_annotate
+callgrind_control
+
+
+END

@@ -1,0 +1,42 @@
+\begin{table}
+\[
+\setlength\extrarowheight{15pt}
+\begin{array}{cc}
+\infer[\textsc{wp-bar}]{wp(A \Box B, Q) | Q_1 \wedge Q_2}
+   {wp(A, Q) | Q_1 &  wp(B,Q) | Q_2} &
+\infer[\textsc{wp-seq}]{wp(A;B, Q) | wp(A,Q_1)}{wp(B,Q) | Q_1} \\
+\infer[\textsc{wp-asg}]{wp(\text{lv} := e) | Q(lv/e)}{} & 
+\infer[\textsc{wp-skip}]{wp(\textbf{skip}, Q) | Q}{} \\
+\infer[\textsc{wp-assume}]{wp(\text{ {\bf assume} e}, Q) | e \Rightarrow
+    Q}{} &
+\infer[\textsc{wp-assert}]{wp(\text{{\bf assert} e}, Q) | e \wedge
+  Q}{}\\
+\end{array}
+\]
+\caption{Syntax-directed method for calculating the weakest
+  pre-condition.}
+\label{tab:wpcalculation}
+\end{table}
+
+\begin{table}
+\[
+\setlength\extrarowheight{15pt}
+\begin{array}{cc}
+\infer[\textsc{sub-bop}]{\text{$A$ {\it bop} $B$ $(lv/e)$}
+  |\text{$A_1$ {\it bop} $B_1$}} {A (lv/e) | A_1 & B(lv/e) | B_2} & 
+\infer[\textsc{sub-uop}]{\text{{\it uop} $A (lv/e)$} | \text{{\it uop} $A_1$}}
+{A (lv/e) | A_1} \\
+ \infer[\textsc{sub-temp}]{ t (lv/e) | e}{ t \in \textsc{Temp} & lv =
+   t} &
+ \infer[\textsc{sub-Talias}]{\textsc{mem}[A] (lv/e) | e}
+ {A (lv/e) | A_1 & \text{alias}(mem[A_1], lv) = \true} \\
+ \infer[\textsc{sub-Falias}]{\textsc{mem}[A] (lv/e) | \textsc{mem}[A_1]}
+ {A (lv/e) | A_1 & \text{alias}(\textsc{mem}[A_1], lv) = \false} &
+ \infer[\textsc{sub-Malias}]{\textsc{mem}[A] (lv/e) |\text{{\bf if}
+     $A_1 =lv$ {\bf then} $e$ {\bf else} \textsc{mem}$[A_1]$}}
+ {A (lv/e) | A_1 & \text{alias}(\textsc{mem}[A_1], lv) = \textbf{M}} \\
+\end{array}
+\]
+\caption{Semantics for substitution on post-condition $Q$.}
+\label{tab:substitution}
+\end{table}

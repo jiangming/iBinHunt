@@ -1,0 +1,16 @@
+%% Regression level = 3
+%% Result = InValid
+%% Language = presentation
+
+filter: ARRAY BITVECTOR(32) OF BITVECTOR(8);
+mem: ARRAY BITVECTOR(32) OF BITVECTOR(8);
+%----------------------------------------------------
+ASSERT NOT ((((filter[0bin00000000000000000000000000000111] 
+        @ filter[0bin00000000000000000000000000000110]) 
+       @ filter[0bin00000000000000000000000000000101]) 
+      @ filter[0bin00000000000000000000000000000100]) 
+     = 0bin00000000000000000000000000000011);
+
+%----------------------------------------------------
+QUERY FALSE;
+COUNTEREXAMPLE;

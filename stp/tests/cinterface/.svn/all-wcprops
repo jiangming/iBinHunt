@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/tests/cinterface
+END
+stp-counterex.c
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/tests/cinterface/stp-counterex.c
+END
+array-cvcl-02.c
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/tests/cinterface/array-cvcl-02.c
+END
+stp-div-001.c
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/tests/cinterface/stp-div-001.c
+END
+multiple-queries.c
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/tests/cinterface/multiple-queries.c
+END
+c_interface.h
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/tests/cinterface/c_interface.h
+END
+x.c
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/tests/cinterface/x.c
+END
+y.c
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/tests/cinterface/y.c
+END
+push-pop.c
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/tests/cinterface/push-pop.c
+END
+print.c
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/tests/cinterface/print.c
+END
+simplify.c
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/tests/cinterface/simplify.c
+END
+regr-001.c
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/tests/cinterface/regr-001.c
+END

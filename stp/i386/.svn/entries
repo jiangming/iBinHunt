@@ -1,0 +1,55 @@
+8
+
+dir
+504
+https://flyer.sis.smu.edu.sg/svn/code/dsta-vine/vine-2010-07-09/stp/i386
+https://flyer.sis.smu.edu.sg/svn/code/dsta-vine
+
+
+
+2010-07-09T09:00:27.836718Z
+504
+mengpan
+
+
+svn:special svn:externals svn:needs-lock
+
+stp _old
+file
+
+
+
+
+2009-03-31T08:38:10.000000Z
+fda11e607b1e222be722b39bfccd9a42
+2010-07-09T09:00:27.836718Z
+504
+mengpan
+has-props
+
+stp
+file
+
+
+
+
+2009-11-30T13:33:07.000000Z
+610a68755b749b3552745126f0350eb6
+2010-07-09T09:00:27.836718Z
+504
+mengpan
+has-props
+
+libstp.a
+file
+
+
+
+
+2009-03-31T08:38:10.000000Z
+aa2fdb7bfac4a8c64bc38767da64acc5
+2010-07-09T09:00:27.836718Z
+504
+mengpan
+has-props
+

@@ -1,0 +1,8 @@
+\section{\vine  Formalism}
+
+\input{absyn-grammar}
+\input{ir-overview}
+\input{ir-typechecking}
+
+
+%\input{absyn-types}

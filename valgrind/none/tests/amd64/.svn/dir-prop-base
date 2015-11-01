@@ -1,0 +1,27 @@
+K 10
+svn:ignore
+V 223
+.deps
+faultstatus
+insn_basic
+insn_basic.c
+insn_fpu
+insn_fpu.c
+insn_mmx
+insn_mmx.c
+insn_sse
+insn_sse.c
+insn_sse2
+insn_sse2.c
+jrcxz
+looper
+shrld
+smc1
+*.stderr.diff
+*.stderr.out
+*.stdout.diff
+*.stdout.out
+Makefile
+Makefile.in
+
+END

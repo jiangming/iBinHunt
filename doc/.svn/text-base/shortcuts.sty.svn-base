@@ -1,0 +1,24 @@
+\newcommand{\prog}{\ensuremath{{\cal P}}\xspace}
+\newcommand{\true}{true\xspace}
+\newcommand{\false}{false\xspace}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\xor}{\ensuremath{\oplus}}
+
+\newcommand{\ir}{Tigger\xspace}
+\newcommand{\vine}{VinE\xspace}
+\newcommand{\Labels}{\ensuremath{{\cal L}}\xspace}
+
+\newcommand{\msf}[1]{\mathsf{#1}}
+\newcommand{\Treg}[1]{\text{reg#1\_t}}
+
+\newcommand{\bool}{\text{reg1\_t}}
+\newcommand{\Tattr}[1]{\ensuremath{\tau^#1}}
+\newcommand{\Tnull}{\text{NULL}}
+\newcommand{\Tvoid}{\text{void}}
+\newcommand{\Tstring}{\text{string\_t}}
+\newcommand{\Taddr}{\text{addr\_t}}
+
+\newcommand{\Tcompat}[2]{{\tt T_{compat}}\ensuremath{(#1, #2)}}
+\newcommand{\Tvalid}[1]{\ensuremath{{\text T_\text{valid}}(}#1\ensuremath{)}}
+\newcommand{\Ldef}[1]{\ensuremath{{\text L_\text{valid}}(}#1\ensuremath{)}}
+\newcommand{\Tint}[1]{\ensuremath{{\text T_\text{int}}(#1)}}

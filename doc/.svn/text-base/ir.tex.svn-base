@@ -1,0 +1,194 @@
+\section{The IR}\label{sec:IR}
+
+The IR is the front-end for all our research. The IR library is
+responsible for translating the binary into a usable and unambigious
+IR.  Our IR, called tigger, is an adaption of the IR used in the Tiger
+compiler book~\cite{appelBOOK:1998}.
+
+\subsection{The IR}
+
+\input{irtypes}
+
+Our IR is shown in Table~\ref{fig:irtypes}. Our IR consists of
+statements (Stmt) and expressions (Exp).  Expressions are pure, i.e.,
+side-effect free. One thing to note is that both jumps ({\tt Jmp}) and
+conditional jumps ({\tt CJmp}) have targets that are expressions, not
+necessarily labels.  That is because the jump target may be indirect,
+i.e., calculated via an expression.~\footnote{One may wonder why we
+have {\tt Label} and {\tt Name}. Both name a location in the
+program. The reason we need {\tt Name} as an expression is because
+jump targets should be expressions, i.e., they may be calculated, or
+they may be a known location given by {\tt Name}. However, we want
+program locations to be ``higher level'' than expressions, so we also
+have {\tt Label}. Thus, we have {\tt Name} of {\tt Label}, i.e., an
+expression containing a statement. This may seem weird, but since {\tt
+Label} has no side effects, it still is at least consistent in some
+respect.}.
+
+%% Statements in our language are:
+%% \begin{itemize}\squish
+
+%% \item {\tt Jmp}({\it exp}) - {\tt Jmp} is an unconditional jump. {\it
+%%   exp} is the jump target. If {\it exp} is of type {\tt Name}, then
+%%   the jump is to a known location, i.e., a direct jump.  If {\it exp}
+%%   is not of type {\tt Name}, then the jump is indirect.
+
+%% \item {\tt CJmp}({\it exp}, {\it true\_exp\_target}, {\it
+%%   false\_exp\_target}) - {\tt CJmp} is a conditional jump.  {\it exp}
+%%   is evaluated, and if true, control is transfered to {\it
+%%   true\_exp\_target}, else control is tranfered to {\it
+%%   false\_exp\_target}.  When constructing a {\tt CJmp}, {\it exp}
+%%   should evaluate to type bool, though we do not explicitly
+%%   check. {\it true\_exp\_target} and {\it false\_exp\_target} are
+%%   similar to the expression in {\tt Jmp}: if they are of type {\it
+%%   Name}, then the jump target is known, else the jump target is
+%%   indirect. Note that in binaries, usually {\it false\_exp\_target}
+%%   will be a fall-through address, thus a known location, thus a {\tt
+%%   Name}.
+
+%% \item {\tt Move}({\it lhs\_exp}, {\it rhs\_exp}) - {\tt Move} is our
+%%   assignment statement {\it lhs\_exp} := {\it rhs\_exp}. {\tt Move} is
+%%   used for both load and store, i.e, if {\it lhs\_exp} is a {\tt Mem},
+%%   then the {\tt Move} is a store to memory, and if {\it lhs\_exp} is
+%%   a {\tt Temp}, then this is a load.
+
+%% \item {\tt Special}({\it string}) - {\tt Special} are for
+%%   instructions that change the processor state, such as halt,
+%%   interrupts, etc.  The {\it string} is the x86 instruction name. 
+
+%% \item {\tt Label}({\it exp}) - A label is an abstract location in the
+%%   program, e.g., the beginning of a basic block. Labels serve as
+%%   targets for jumps (both {\tt Jmp} and {\tt CJmp}).  Direct jumps
+%%   will have {\it exp} be a {\sc Name}, while indirect jumps will have
+%%   some arithmetic expression. Labels have no effect on execution.
+
+%% \item {\tt ExpStmt}({\it exp}) - An {\tt ExpStmt} is a statement which
+%%   executes an expression, then throws away the result. {\tt ExpStmt}
+%%   is useful for anaysis: you will not see a direct translation of an
+%%   x86 instruction to {\tt ExpStmt}.
+
+%% \item {\tt Comment}({\it string}) - A {\tt Comment} is a user-written
+%%   comment in the code. Comments may be inserted by analysis, during
+%%   translation, etc, and are used to make the code more
+%%   readable. Comments have no effect on execution.
+%% \end{itemize}
+
+%% Expressions in our language are:
+%% % FIXME: why is this duplicated
+%% \begin{itemize}\squish
+
+%% \item {\tt BinOp}({\it optype}, {\it lhs}, {\it rhs}) -  A binary
+%%   operation.  
+
+%% \item {\tt UnOp}({\it optype}, {\it exp}) - A unary operation.
+
+%% \item {\tt Constant}({\it regtype}, {\it value}) - A constant.
+
+%% \item {\tt Temp}({\it regtype}, {\it string}) - An abstract
+%%   register. There are an infinite number of Temps.
+
+%% \item {\tt Name}({\it label}) - An abstract name. 
+
+%% \item {\tt Mem}({\it exp}) - A memory reference to address {\it exp}.
+
+%% \item {\tt Phi}( {\it var} list) - {\tt Phi} expressions are used for
+%%   SSA. 
+
+%% \item {\tt Cast}({\it casttype}, {\it exp}) - A cast.
+
+%% \item {\tt Unknown}({\it string}) - An instruction we could not
+%%   translate. The {\it string} is the assembly.  Note that although {\tt
+%%   Unknown}'s are part of the IR, we consider them an artifact of
+%%   incomplete translation.  Thus, for the most part, we ignore them in
+%%   our formalism, though certainly any implementation may have to make
+%%   a choice of what to do when an unknown is encountered.
+
+%% \item {\tt Extension} - This is a place-holder for extensions to the
+%%   IR, i.e., for adding a new expression type. 
+%% \end{itemize}
+
+%% {\tt binop\_type} and {\tt unop\_type} are mostly straightforward: they are
+%% the binary operation and unary operation. Note that for {\tt
+%%   unop\_type} the difference between NOT and BNOT is the latter is a
+%% bitwise-not  while the former is a logical NOT.  {\tt register\_type}
+%% is the type of register, and consists of both the kind {\tt
+%%   reg\_kind} and width {\tt reg\_width}.  {\tt cast\_type} is the type
+%% of cast, and is a carry-over from valgrind cast types where more
+%% information can be found.
+
+\subsection{IR Static Semantics}
+\input{ir_static}
+
+\subsection{IR Operational Semantics}
+
+To be written
+
+\subsection{IR expression comparisons}
+\input{ircanonical}
+
+\subsection{Using the IR}
+
+In this section I describe using visitors.
+
+%% \subsection{Implemented IR Routines}
+
+%% In this section we describe IR routines already implemented as part of
+%% the IR library. 
+
+%% \subsubsection{Control Flow Graph (CFG) and Call Graph (CG)}
+
+%% \subsubsection{SSA Form}
+
+%% \subsubsection{Dead Code Elimination}
+
+
+\subsection{IR Creation}
+
+Our IR is created from a list of assembly instructions.  The relevant
+headers are {\tt stmt.h}, {\tt exp.h}, {\tt irtoir.h}, and {\tt
+vexmem.h}. Normally, one would define the transformation rules for
+each x86 instruction and it's corresonding IR.  We take a short-cut.
+
+We pass each instruction in the instruction list to
+Valgrind~\cite{net:valgrind2003}, an x86 emulator. Valgrind will
+translate the assembly instruction into its own IR.  We then take the
+Valgrind IR and translate it to our own IR (via the code in the {\tt
+  vex} libasmir director). 
+
+One may wonder why we translate to our own IR if we have Valgrind's
+IR. This is a good question.  We have learned that IR's for dynamic
+execution are often insufficient for static analysis.  The central
+reason is a dynamic IR can get away with being imprecise by not
+modelling certain characteristics of the CPU. For example, the
+Valgrind IR never calculates EFLAGS (the status registers) directly,
+since it can simply execute the code to figure out which status flags
+have changed.  So, the high level answer is dynamic IR's seem to be
+imprecise and potentially ambigious, while our IR is precise and
+unambiguous.
+
+
+%% We currently support ELF executables with symbol tables. We statically
+%% compile all our test cases.  Support for PE and stripped binaries is
+%% straight-forward: users will only need to add support for locating
+%% function boundries (e.g., by looking for function prologues and
+%% epilogues).
+
+%% The steps for creating the IR are:
+%% \begin{itemize}
+%% \item Parse the binary into a series of sections. Locate executable
+%%   sections.
+%% \item Locate functions within each section.
+%% \item Disassemble each function.
+%% \item Convert each assembly instruction to the IR.
+%% \end{itemize}
+%% We describe the details in more depth below.
+
+%% \subsubsection{Parsing the Binary}
+%% We use GNU BFD to parse the binary.  We disassemble all sections with
+%% SEC\_CODE set as a flag.  
+
+%% \subsubsection{Locate functions}
+%% If the symbol table is provided, we also locate it.
+
+
+

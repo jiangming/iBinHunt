@@ -1,0 +1,70 @@
+\documentclass[11pt,onecolumn]{article}
+\usepackage{fancyvrb}
+\usepackage{relsize}
+\usepackage{fullpage}
+\usepackage{amstext}
+\usepackage[dvips]{graphicx}       %%% graphics for dvips
+\usepackage[colorlinks=true, linkcolor=blue, 
+  citecolor=blue, urlcolor=blue,
+  ps2pdf,                %%% hyper-references for ps2pdf
+  bookmarks=true,        %%% generate bookmarks ...
+  bookmarksnumbered=true,%%% ... with numbers
+]{hyperref}
+% pdfcreator and pdfproducer are set automatically in pdfLaTeX
+\hypersetup{ pdfcreator  = {LaTeX with hyperref package},
+  pdfproducer = {dvips + ps2pdf} }
+\let\url\nolinkurl % because dvips cannot break url across lines
+%\usepackage{times}
+% Make \_ be CMTT's underscore, not \textunderscore, since we use
+% it in code and command names.
+\def\_{\char"5F}
+
+\newcommand{\comment}[1]{}
+\newcommand{\mytt}{\small \tt}
+\newcommand{\titled}{How to Install and Run an Example with VinE}
+\title{\mbox{}\\[-.8in]\bf \titled}
+\author{Original version by Prateek Saxena, with updates from Stephen McCamant}
+\date{Sep 12th, 2008: SVN trunk r3466 and Ubuntu 8.04}
+\begin{document}
+\maketitle
+
+This document is intended to be a quick start guide for setting up and
+running VinE, the static analysis component of the BitBlaze Binary
+Analysis Framework. It assumes that you have some familiarity with
+Linux.  The instructions are based on the version of VinE in the SVN
+trunk as of the date shown in the header, running on a vanilla Ubuntu
+8.04 distribution of Linux.  The procedure is intermixed with
+explanations about utilities to give an overview of how things
+work. The goal in this exercise is to trace from a simple program with
+symbolic keyboard input, and generate an STP file which models the
+weakest precondition of the control-flow path the program took. In
+other words, the conditions on the inputs that cause it to take a
+execute a certain branch of code. To follow along with the
+instructions, you'll need to start with a trace file like the one
+generated in the separate TEMU tutorial.
+
+\section {Installation}
+\label{sec:install}
+
+The following script, which is also found as
+\verb'docs/install-vine.sh' in the VinE source, shows the steps for
+building and installing Vine and the other software it depends on:
+
+\VerbatimInput{../install-vine.sh}
+
+\input {irformulagen}
+\input {stp}
+\input {utils}
+
+
+\section {Reporting Bugs}
+
+Please report bugs to the bugzilla at:
+\texttt{https://bullseye.cs.berkeley.edu/bugzilla/}.
+
+VinE contains a \texttt{VERSION} file in its source base
+directory. Please report the version number from that file when filing
+bugs. And please also report if you notice something wrong or out of
+date in this document.
+
+\end{document}

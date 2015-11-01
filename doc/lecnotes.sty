@@ -1,0 +1,59 @@
+% begin palatino.sty
+% copied from palatino.sty, except left ttdefault to CMTT
+\renewcommand{\rmdefault}{ppl}
+\renewcommand{\sfdefault}{phv}
+% \renewcommand{\ttdefault}{pcr}
+% end palatino.sty
+
+\addtolength{\oddsidemargin}{30pt}
+\addtolength{\evensidemargin}{-22pt}
+\setlength{\inferLineSkip}{4pt}
+
+\newtheorem{theorem}{Theorem}[section]
+
+\newenvironment{proof}{\trivlist \item[\hskip \labelsep{\bf
+Proof:}]}{\hfill$\Box$ \endtrivlist}
+
+\def\thebibliography#1{%\subsection{References}
+ \list
+ {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+ \advance\leftmargin\labelsep\itemsep 0pt%
+ \usecounter{enumi}}
+ \def\newblock{\hskip .11em plus .33em minus -.07em}
+ \sloppy
+ \sfcode`\.=1000\relax}
+
+\title{{\large 15-819K: Logic Programming}\\
+       {\large Lecture \lecnum}\\
+       \lectitle}
+\author{Frank Pfenning}
+\date{\lecdate}
+
+\pagestyle{fancyplain}
+
+\setlength{\headheight}{14pt}
+% \renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+% \renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\lhead[\fancyplain{}{\bfseries L\lecnum.\thepage}]%
+      {\fancyplain{}{\bfseries\lectitle}}
+\chead[]{}
+\rhead[\fancyplain{}{\bfseries\lectitle}]%
+      {\fancyplain{}{\bfseries L\lecnum.\thepage}}
+\lfoot[{\small\scshape Lecture Notes}]{{\small\scshape Lecture Notes}}
+\cfoot[]{}
+\rfoot[{\small\scshape\lecdate}]{{\small\scshape\lecdate}}
+
+% For code environment, to get tt-style underscore
+% \renewcommand{\_}{\char`\_}
+% \renewcommand{\{}{\char`\{}
+% \renewcommand{\}}{\char`\}}
+
+% Some pervasively used definitions
+
+\newcommand{\blankline}{\mbox{}} % for \begin{code}...\end{code}
+\newcommand{\lowered}[1]{\raisebox{-0.75\baselineskip}{#1}}
+
+\newcommand{\msf}[1]{\mathsf{#1}}
+\newcommand{\lif}{\mathrel{\leftarrow}}
+\newcommand{\DD}{\mathcal{D}}
+\newcommand{\EE}{\mathcal{E}}

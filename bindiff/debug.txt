@@ -1,0 +1,1214 @@
+function name-before fix: sub_415DB0
+function name-before fix: sub_4157FD
+function name-before fix: nullsub_1
+function name-before fix: sub_4139FF
+function name-before fix: sub_40E9D2
+function name-before fix: sub_40B8A9
+function name-before fix: sub_40B76E
+function name-before fix: sub_40AAE4
+function name-before fix: sub_408994
+function name-before fix: sub_408950
+function name-before fix: sub_40890C
+function name-before fix: sub_4088C4
+function name-before fix: sub_40887C
+function name-before fix: sub_40882C
+function name-before fix: sub_4087EC
+function name-before fix: sub_407444
+function name-before fix: sub_4073F4
+function name-before fix: sub_4073AC
+function name-before fix: sub_407364
+function name-before fix: sub_4072BC
+function name-before fix: sub_407278
+function name-before fix: sub_407210
+function name-before fix: sub_4071C8
+function name-before fix: sub_407180
+function name-before fix: sub_40713C
+function name-before fix: sub_4070F8
+function name-before fix: sub_4070B0
+function name-before fix: sub_407054
+function name-before fix: sub_40700C
+function name-before fix: sub_406FC0
+function name-before fix: sub_406F7C
+function name-before fix: sub_406F30
+function name-before fix: sub_406EEC
+function name-before fix: sub_406E94
+function name-before fix: sub_406E4C
+function name-before fix: sub_406DBC
+function name-before fix: sub_406D70
+function name-before fix: sub_406CD0
+function name-before fix: sub_406C38
+function name-before fix: sub_406BE0
+function name-before fix: sub_406A60
+function name-before fix: sub_4068E4
+function name-before fix: sub_406894
+function name-before fix: sub_40684C
+function name-before fix: sub_406808
+function name-before fix: sub_4067C0
+function name-before fix: sub_4066A8
+function name-before fix: sub_406658
+function name-before fix: sub_4065FC
+function name-before fix: sub_406598
+function name-before fix: sub_406550
+function name-before fix: sub_406500
+function name-before fix: sub_4064A8
+function name-before fix: sub_40645C
+function name-before fix: sub_406400
+function name-before fix: sub_4063BC
+function name-before fix: sub_40637C
+function name-before fix: sub_406026
+function name-before fix: sub_406019
+function name-before fix: sub_40600C
+function name-before fix: sub_405FD8
+function name-before fix: ThunRTMain
+function name-before fix: EVENT_SINK_Release
+function name-before fix: EVENT_SINK_AddRef
+function name-before fix: EVENT_SINK_QueryInterface
+function name-before fix: __vbaAryMove
+function name-before fix: __vbaVar2Vec
+function name-before fix: rtcStrConvVar2
+function name-before fix: __vbaRedimPreserve
+function name-before fix: __vbaUbound
+function name-before fix: __vbaDerefAry1
+function name-before fix: __vbaUI1I2
+function name-before fix: VarPtr
+function name-before fix: __vbaAryLock
+function name-before fix: __vbaAryUnlock
+function name-before fix: __vbaAryDestruct
+function name-before fix: __vbaNew2
+function name-before fix: __vbaHresultCheckObj
+function name-before fix: __vbaOnError
+function name-before fix: __vbaVarTstEq
+function name-before fix: rtcLowerCaseVar
+function name-before fix: __vbaFreeObj
+function name-before fix: __vbaFreeVarList
+function name-before fix: __vbaEnd
+function name-before fix: __vbaSetSystemError
+function name-before fix: __vbaLateIdSt
+function name-before fix: __vbaObjSet
+function name-before fix: __vbaLateIdCall
+function name-before fix: __vbaR8IntI4
+function name-before fix: rtcMsgBox
+function name-before fix: __vbaVarDup
+function name-before fix: rtcFileCopy
+function name-before fix: __vbaStrMove
+function name-before fix: __vbaStrCat
+function name-before fix: __vbaFreeStrList
+function name-before fix: __vbaFreeObjList
+function name-before fix: __vbaI4Var
+function name-before fix: __vbaStrToAnsi
+function name-before fix: __vbaVarCopy
+function name-before fix: __vbaFreeStr
+function name-before fix: rtcShell
+function name-before fix: __vbaFreeVar
+function name-before fix: __vbaStrCmp
+function name-before fix: rtcRandomNext
+function name-before fix: __vbaVarMove
+function name-before fix: __vbaVarForInit
+function name-before fix: __vbaVarTstGe
+function name-before fix: __vbaVarTstLe
+function name-before fix: __vbaStrCopy
+function name-before fix: __vbaStrVarMove
+function name-before fix: rtcVarBstrFromAnsi
+function name-before fix: __vbaVarSub
+function name-before fix: __vbaVarCat
+function name-before fix: __vbaFileOpen
+function name-before fix: __vbaPut4
+function name-before fix: rtcFileLength
+function name-before fix: __vbaFileClose
+function name-before fix: __vbaVarForNext
+function name-before fix: __vbaErrorOverflow
+function name-before fix: __vbaI2Var
+function name-before fix: __vbaLateIdCallLd
+function name-before fix: rtcFreeFile
+function name-before fix: __vbaI2I4
+function name-before fix: rtcSpaceBstr
+function name-before fix: __vbaGet3
+function name-before fix: rtcDoEvents
+function name-before fix: __vbaStrI4
+function name-before fix: rtcLeftCharVar
+function name-before fix: rtcRightCharVar
+function name-before fix: __vbaLenBstr
+function name-before fix: __vbaInStrVar
+function name-before fix: __vbaFpI4
+function name-before fix: rtcR8ValFromBstr
+function name-before fix: __vbaStrVarVal
+function name-before fix: __vbaLenVar
+function name-before fix: __vbaFpI2
+function name-before fix: rtcSendKeys
+function name-before fix: rtcSpaceVar
+function name-before fix: __vbaI4Str
+function name-before fix: __vbaStrToUnicode
+function name-before fix: rtcUpperCaseVar
+function name-before fix: rtcMidCharVar
+function name-before fix: rtcDir
+function name-before fix: rtcGetFileAttr
+function name-before fix: __vbaFpR8
+function name-before fix: __vbaFPInt
+function name-before fix: rtcKillFiles
+function name-before fix: rtcMakeDir
+function name-before fix: rtcRemoveDir
+function name-before fix: rtcFileLen
+function name-before fix: __vbaInStr
+function name-before fix: __vbaI4Cy
+function name-before fix: __vbaRecUniToAnsi
+function name-before fix: __vbaRecAnsiToUni
+function name-before fix: __vbaRecDestructAnsi
+function name-before fix: __vbaLineInputStr
+function name-before fix: rtcEndOfFile
+function name-before fix: rtcSetFileAttr
+function name-before fix: __vbaNameFile
+function name-before fix: rtcTrimBstr
+function name-before fix: rtcRightCharBstr
+function name-before fix: rtcLeftCharBstr
+function name-before fix: __vbaRecDestruct
+function name-before fix: __vbaStrFixstr
+function name-before fix: __vbaLsetFixstr
+function name-before fix: __vbaNew
+function name-before fix: DllFunctionCall
+function name-before fix: _adj_fdivr_m64
+function name-before fix: _adj_fdiv_m64
+function name-before fix: _adj_fdiv_m32
+function name-before fix: __vbaExceptHandler
+function name-before fix: __vbaChkstk
+function name-after fix: sub_415DB0
+function name-after fix: sub_4157FD
+function name-after fix: nullsub_1
+function name-after fix: sub_4139FF
+function name-after fix: sub_40E9D2
+function name-after fix: sub_40B8A9
+function name-after fix: sub_40B76E
+function name-after fix: sub_40AAE4
+function name-after fix: sub_408994
+function name-after fix: sub_408950
+function name-after fix: sub_40890C
+function name-after fix: sub_4088C4
+function name-after fix: sub_40887C
+function name-after fix: sub_40882C
+function name-after fix: sub_4087EC
+function name-after fix: sub_407444
+function name-after fix: sub_4073F4
+function name-after fix: sub_4073AC
+function name-after fix: sub_407364
+function name-after fix: sub_4072BC
+function name-after fix: sub_407278
+function name-after fix: sub_407210
+function name-after fix: sub_4071C8
+function name-after fix: sub_407180
+function name-after fix: sub_40713C
+function name-after fix: sub_4070F8
+function name-after fix: sub_4070B0
+function name-after fix: sub_407054
+function name-after fix: sub_40700C
+function name-after fix: sub_406FC0
+function name-after fix: sub_406F7C
+function name-after fix: sub_406F30
+function name-after fix: sub_406EEC
+function name-after fix: sub_406E94
+function name-after fix: sub_406E4C
+function name-after fix: sub_406DBC
+function name-after fix: sub_406D70
+function name-after fix: sub_406CD0
+function name-after fix: sub_406C38
+function name-after fix: sub_406BE0
+function name-after fix: sub_406A60
+function name-after fix: sub_4068E4
+function name-after fix: sub_406894
+function name-after fix: sub_40684C
+function name-after fix: sub_406808
+function name-after fix: sub_4067C0
+function name-after fix: sub_4066A8
+function name-after fix: sub_406658
+function name-after fix: sub_4065FC
+function name-after fix: sub_406598
+function name-after fix: sub_406550
+function name-after fix: sub_406500
+function name-after fix: sub_4064A8
+function name-after fix: sub_40645C
+function name-after fix: sub_406400
+function name-after fix: sub_4063BC
+function name-after fix: sub_40637C
+function name-after fix: sub_406026
+function name-after fix: sub_406019
+function name-after fix: sub_40600C
+function name-after fix: sub_405FD8
+function name-after fix: ThunRTMain
+function name-after fix: EVENT_SINK_Release
+function name-after fix: EVENT_SINK_AddRef
+function name-after fix: EVENT_SINK_QueryInterface
+function name-after fix: __vbaAryMove
+function name-after fix: __vbaVar2Vec
+function name-after fix: rtcStrConvVar2
+function name-after fix: __vbaRedimPreserve
+function name-after fix: __vbaUbound
+function name-after fix: __vbaDerefAry1
+function name-after fix: __vbaUI1I2
+function name-after fix: VarPtr
+function name-after fix: __vbaAryLock
+function name-after fix: __vbaAryUnlock
+function name-after fix: __vbaAryDestruct
+function name-after fix: __vbaNew2
+function name-after fix: __vbaHresultCheckObj
+function name-after fix: __vbaOnError
+function name-after fix: __vbaVarTstEq
+function name-after fix: rtcLowerCaseVar
+function name-after fix: __vbaFreeObj
+function name-after fix: __vbaFreeVarList
+function name-after fix: __vbaEnd
+function name-after fix: __vbaSetSystemError
+function name-after fix: __vbaLateIdSt
+function name-after fix: __vbaObjSet
+function name-after fix: __vbaLateIdCall
+function name-after fix: __vbaR8IntI4
+function name-after fix: rtcMsgBox
+function name-after fix: __vbaVarDup
+function name-after fix: rtcFileCopy
+function name-after fix: __vbaStrMove
+function name-after fix: __vbaStrCat
+function name-after fix: __vbaFreeStrList
+function name-after fix: __vbaFreeObjList
+function name-after fix: __vbaI4Var
+function name-after fix: __vbaStrToAnsi
+function name-after fix: __vbaVarCopy
+function name-after fix: __vbaFreeStr
+function name-after fix: rtcShell
+function name-after fix: __vbaFreeVar
+function name-after fix: __vbaStrCmp
+function name-after fix: rtcRandomNext
+function name-after fix: __vbaVarMove
+function name-after fix: __vbaVarForInit
+function name-after fix: __vbaVarTstGe
+function name-after fix: __vbaVarTstLe
+function name-after fix: __vbaStrCopy
+function name-after fix: __vbaStrVarMove
+function name-after fix: rtcVarBstrFromAnsi
+function name-after fix: __vbaVarSub
+function name-after fix: __vbaVarCat
+function name-after fix: __vbaFileOpen
+function name-after fix: __vbaPut4
+function name-after fix: rtcFileLength
+function name-after fix: __vbaFileClose
+function name-after fix: __vbaVarForNext
+function name-after fix: __vbaErrorOverflow
+function name-after fix: __vbaI2Var
+function name-after fix: __vbaLateIdCallLd
+function name-after fix: rtcFreeFile
+function name-after fix: __vbaI2I4
+function name-after fix: rtcSpaceBstr
+function name-after fix: __vbaGet3
+function name-after fix: rtcDoEvents
+function name-after fix: __vbaStrI4
+function name-after fix: rtcLeftCharVar
+function name-after fix: rtcRightCharVar
+function name-after fix: __vbaLenBstr
+function name-after fix: __vbaInStrVar
+function name-after fix: __vbaFpI4
+function name-after fix: rtcR8ValFromBstr
+function name-after fix: __vbaStrVarVal
+function name-after fix: __vbaLenVar
+function name-after fix: __vbaFpI2
+function name-after fix: rtcSendKeys
+function name-after fix: rtcSpaceVar
+function name-after fix: __vbaI4Str
+function name-after fix: __vbaStrToUnicode
+function name-after fix: rtcUpperCaseVar
+function name-after fix: rtcMidCharVar
+function name-after fix: rtcDir
+function name-after fix: rtcGetFileAttr
+function name-after fix: __vbaFpR8
+function name-after fix: __vbaFPInt
+function name-after fix: rtcKillFiles
+function name-after fix: rtcMakeDir
+function name-after fix: rtcRemoveDir
+function name-after fix: rtcFileLen
+function name-after fix: __vbaInStr
+function name-after fix: __vbaI4Cy
+function name-after fix: __vbaRecUniToAnsi
+function name-after fix: __vbaRecAnsiToUni
+function name-after fix: __vbaRecDestructAnsi
+function name-after fix: __vbaLineInputStr
+function name-after fix: rtcEndOfFile
+function name-after fix: rtcSetFileAttr
+function name-after fix: __vbaNameFile
+function name-after fix: rtcTrimBstr
+function name-after fix: rtcRightCharBstr
+function name-after fix: rtcLeftCharBstr
+function name-after fix: __vbaRecDestruct
+function name-after fix: __vbaStrFixstr
+function name-after fix: __vbaLsetFixstr
+function name-after fix: __vbaNew
+function name-after fix: DllFunctionCall
+function name-after fix: _adj_fdivr_m64
+function name-after fix: _adj_fdiv_m64
+function name-after fix: _adj_fdiv_m32
+function name-after fix: __vbaExceptHandler
+function name-after fix: __vbaChkstk
+********* Printing finfo_l **********
+sub_415DB0	415db0	415dd6	false
+sub_4157FD	4157fd	415daf	false
+nullsub_1	413e3d	413e3d	true
+sub_4139FF	4139ff	413a1d	false
+sub_40E9D2	40e9d2	4139fe	false
+sub_40B8A9	40b8a9	40c45b	false
+sub_40B76E	40b76e	40b8a8	false
+sub_40AAE4	40aae4	40abb3	false
+sub_408994	408994	4089ac	false
+sub_408950	408950	408968	false
+sub_40890C	40890c	408924	false
+sub_4088C4	4088c4	4088dc	false
+sub_40887C	40887c	408894	false
+sub_40882C	40882c	408844	false
+sub_4087EC	4087ec	408804	false
+sub_407444	407444	40745c	false
+sub_4073F4	4073f4	40740c	false
+sub_4073AC	4073ac	4073c4	false
+sub_407364	407364	40737c	false
+sub_4072BC	4072bc	4072d4	false
+sub_407278	407278	407290	false
+sub_407210	407210	407228	false
+sub_4071C8	4071c8	4071e0	false
+sub_407180	407180	407198	false
+sub_40713C	40713c	407154	false
+sub_4070F8	4070f8	407110	false
+sub_4070B0	4070b0	4070c8	false
+sub_407054	407054	40706c	false
+sub_40700C	40700c	407024	false
+sub_406FC0	406fc0	406fd8	false
+sub_406F7C	406f7c	406f94	false
+sub_406F30	406f30	406f48	false
+sub_406EEC	406eec	406f04	false
+sub_406E94	406e94	406eac	false
+sub_406E4C	406e4c	406e64	false
+sub_406DBC	406dbc	406dd4	false
+sub_406D70	406d70	406d88	false
+sub_406CD0	406cd0	406ce8	false
+sub_406C38	406c38	406c50	false
+sub_406BE0	406be0	406bf8	false
+sub_406A60	406a60	406a78	false
+sub_4068E4	4068e4	4068fc	false
+sub_406894	406894	4068ac	false
+sub_40684C	40684c	406864	false
+sub_406808	406808	406820	false
+sub_4067C0	4067c0	4067d8	false
+sub_4066A8	4066a8	4066c0	false
+sub_406658	406658	406670	false
+sub_4065FC	4065fc	406614	false
+sub_406598	406598	4065b0	false
+sub_406550	406550	406568	false
+sub_406500	406500	406518	false
+sub_4064A8	4064a8	4064c0	false
+sub_40645C	40645c	406474	false
+sub_406400	406400	406418	false
+sub_4063BC	4063bc	4063d4	false
+sub_40637C	40637c	406394	false
+sub_406026	406026	406032	false
+sub_406019	406019	406025	false
+sub_40600C	40600c	406018	false
+sub_405FD8	405fd8	405fe4	false
+ThunRTMain	401f46	401f4b	true
+EVENT_SINK_Release	401f40	401f45	true
+EVENT_SINK_AddRef	401f3a	401f3f	true
+EVENT_SINK_QueryInterface	401f34	401f39	true
+__vbaAryMove	401f2e	401f33	true
+__vbaVar2Vec	401f28	401f2d	true
+rtcStrConvVar2	401f22	401f27	true
+__vbaRedimPreserve	401f1c	401f21	true
+__vbaUbound	401f16	401f1b	true
+__vbaDerefAry1	401f10	401f15	true
+__vbaUI1I2	401f0a	401f0f	true
+VarPtr	401f04	401f09	true
+__vbaAryLock	401efe	401f03	true
+__vbaAryUnlock	401ef8	401efd	true
+__vbaAryDestruct	401ef2	401ef7	true
+__vbaNew2	401eec	401ef1	true
+__vbaHresultCheckObj	401ee6	401eeb	true
+__vbaOnError	401ee0	401ee5	true
+__vbaVarTstEq	401eda	401edf	true
+rtcLowerCaseVar	401ed4	401ed9	true
+__vbaFreeObj	401ece	401ed3	true
+__vbaFreeVarList	401ec8	401ecd	true
+__vbaEnd	401ec2	401ec7	true
+__vbaSetSystemError	401ebc	401ec1	true
+__vbaLateIdSt	401eb6	401ebb	true
+__vbaObjSet	401eb0	401eb5	true
+__vbaLateIdCall	401eaa	401eaf	true
+__vbaR8IntI4	401ea4	401ea9	true
+rtcMsgBox	401e9e	401ea3	true
+__vbaVarDup	401e98	401e9d	true
+rtcFileCopy	401e92	401e97	true
+__vbaStrMove	401e8c	401e91	true
+__vbaStrCat	401e86	401e8b	true
+__vbaFreeStrList	401e80	401e85	true
+__vbaFreeObjList	401e7a	401e7f	true
+__vbaI4Var	401e74	401e79	true
+__vbaStrToAnsi	401e6e	401e73	true
+__vbaVarCopy	401e68	401e6d	true
+__vbaFreeStr	401e62	401e67	true
+rtcShell	401e5c	401e61	true
+__vbaFreeVar	401e56	401e5b	true
+__vbaStrCmp	401e50	401e55	true
+rtcRandomNext	401e4a	401e4f	true
+__vbaVarMove	401e44	401e49	true
+__vbaVarForInit	401e3e	401e43	true
+__vbaVarTstGe	401e38	401e3d	true
+__vbaVarTstLe	401e32	401e37	true
+__vbaStrCopy	401e2c	401e31	true
+__vbaStrVarMove	401e26	401e2b	true
+rtcVarBstrFromAnsi	401e20	401e25	true
+__vbaVarSub	401e1a	401e1f	true
+__vbaVarCat	401e14	401e19	true
+__vbaFileOpen	401e0e	401e13	true
+__vbaPut4	401e08	401e0d	true
+rtcFileLength	401e02	401e07	true
+__vbaFileClose	401dfc	401e01	true
+__vbaVarForNext	401df6	401dfb	true
+__vbaErrorOverflow	401df0	401df5	true
+__vbaI2Var	401dea	401def	true
+__vbaLateIdCallLd	401de4	401de9	true
+rtcFreeFile	401dde	401de3	true
+__vbaI2I4	401dd8	401ddd	true
+rtcSpaceBstr	401dd2	401dd7	true
+__vbaGet3	401dcc	401dd1	true
+rtcDoEvents	401dc6	401dcb	true
+__vbaStrI4	401dc0	401dc5	true
+rtcLeftCharVar	401dba	401dbf	true
+rtcRightCharVar	401db4	401db9	true
+__vbaLenBstr	401dae	401db3	true
+__vbaInStrVar	401da8	401dad	true
+__vbaFpI4	401da2	401da7	true
+rtcR8ValFromBstr	401d9c	401da1	true
+__vbaStrVarVal	401d96	401d9b	true
+__vbaLenVar	401d90	401d95	true
+__vbaFpI2	401d8a	401d8f	true
+rtcSendKeys	401d84	401d89	true
+rtcSpaceVar	401d7e	401d83	true
+__vbaI4Str	401d78	401d7d	true
+__vbaStrToUnicode	401d72	401d77	true
+rtcUpperCaseVar	401d6c	401d71	true
+rtcMidCharVar	401d66	401d6b	true
+rtcDir	401d60	401d65	true
+rtcGetFileAttr	401d5a	401d5f	true
+__vbaFpR8	401d54	401d59	true
+__vbaFPInt	401d4e	401d53	true
+rtcKillFiles	401d48	401d4d	true
+rtcMakeDir	401d42	401d47	true
+rtcRemoveDir	401d3c	401d41	true
+rtcFileLen	401d36	401d3b	true
+__vbaInStr	401d30	401d35	true
+__vbaI4Cy	401d2a	401d2f	true
+__vbaRecUniToAnsi	401d24	401d29	true
+__vbaRecAnsiToUni	401d1e	401d23	true
+__vbaRecDestructAnsi	401d18	401d1d	true
+__vbaLineInputStr	401d12	401d17	true
+rtcEndOfFile	401d0c	401d11	true
+rtcSetFileAttr	401d06	401d0b	true
+__vbaNameFile	401d00	401d05	true
+rtcTrimBstr	401cfa	401cff	true
+rtcRightCharBstr	401cf4	401cf9	true
+rtcLeftCharBstr	401cee	401cf3	true
+__vbaRecDestruct	401ce8	401ced	true
+__vbaStrFixstr	401ce2	401ce7	true
+__vbaLsetFixstr	401cdc	401ce1	true
+__vbaNew	401cd6	401cdb	true
+DllFunctionCall	401cd0	401cd5	true
+_adj_fdivr_m64	401c82	401c87	true
+_adj_fdiv_m64	401c64	401c69	true
+_adj_fdiv_m32	401c58	401c5d	true
+__vbaExceptHandler	401c46	401c4b	true
+__vbaChkstk	401c40	401c45	true
+******** Printing list of Functions ******
+Label="__vbaChkstk"
+	External=TRUE
+	No Statments
+Label="__vbaExceptHandler"
+	External=TRUE
+	No Statments
+Label="_adj_fdiv_m32"
+	External=TRUE
+	No Statments
+Label="_adj_fdiv_m64"
+	External=TRUE
+	No Statments
+Label="_adj_fdivr_m64"
+	External=TRUE
+	No Statments
+Label="DllFunctionCall"
+	External=TRUE
+	No Statments
+Label="__vbaNew"
+	External=TRUE
+	No Statments
+Label="__vbaLsetFixstr"
+	External=TRUE
+	No Statments
+Label="__vbaStrFixstr"
+	External=TRUE
+	No Statments
+Label="__vbaRecDestruct"
+	External=TRUE
+	No Statments
+Label="rtcLeftCharBstr"
+	External=TRUE
+	No Statments
+Label="rtcRightCharBstr"
+	External=TRUE
+	No Statments
+Label="rtcTrimBstr"
+	External=TRUE
+	No Statments
+Label="__vbaNameFile"
+	External=TRUE
+	No Statments
+Label="rtcSetFileAttr"
+	External=TRUE
+	No Statments
+Label="rtcEndOfFile"
+	External=TRUE
+	No Statments
+Label="__vbaLineInputStr"
+	External=TRUE
+	No Statments
+Label="__vbaRecDestructAnsi"
+	External=TRUE
+	No Statments
+Label="__vbaRecAnsiToUni"
+	External=TRUE
+	No Statments
+Label="__vbaRecUniToAnsi"
+	External=TRUE
+	No Statments
+Label="__vbaI4Cy"
+	External=TRUE
+	No Statments
+Label="__vbaInStr"
+	External=TRUE
+	No Statments
+Label="rtcFileLen"
+	External=TRUE
+	No Statments
+Label="rtcRemoveDir"
+	External=TRUE
+	No Statments
+Label="rtcMakeDir"
+	External=TRUE
+	No Statments
+Label="rtcKillFiles"
+	External=TRUE
+	No Statments
+Label="__vbaFPInt"
+	External=TRUE
+	No Statments
+Label="__vbaFpR8"
+	External=TRUE
+	No Statments
+Label="rtcGetFileAttr"
+	External=TRUE
+	No Statments
+Label="rtcDir"
+	External=TRUE
+	No Statments
+Label="rtcMidCharVar"
+	External=TRUE
+	No Statments
+Label="rtcUpperCaseVar"
+	External=TRUE
+	No Statments
+Label="__vbaStrToUnicode"
+	External=TRUE
+	No Statments
+Label="__vbaI4Str"
+	External=TRUE
+	No Statments
+Label="rtcSpaceVar"
+	External=TRUE
+	No Statments
+Label="rtcSendKeys"
+	External=TRUE
+	No Statments
+Label="__vbaFpI2"
+	External=TRUE
+	No Statments
+Label="__vbaLenVar"
+	External=TRUE
+	No Statments
+Label="__vbaStrVarVal"
+	External=TRUE
+	No Statments
+Label="rtcR8ValFromBstr"
+	External=TRUE
+	No Statments
+Label="__vbaFpI4"
+	External=TRUE
+	No Statments
+Label="__vbaInStrVar"
+	External=TRUE
+	No Statments
+Label="__vbaLenBstr"
+	External=TRUE
+	No Statments
+Label="rtcRightCharVar"
+	External=TRUE
+	No Statments
+Label="rtcLeftCharVar"
+	External=TRUE
+	No Statments
+Label="__vbaStrI4"
+	External=TRUE
+	No Statments
+Label="rtcDoEvents"
+	External=TRUE
+	No Statments
+Label="__vbaGet3"
+	External=TRUE
+	No Statments
+Label="rtcSpaceBstr"
+	External=TRUE
+	No Statments
+Label="__vbaI2I4"
+	External=TRUE
+	No Statments
+Label="rtcFreeFile"
+	External=TRUE
+	No Statments
+Label="__vbaLateIdCallLd"
+	External=TRUE
+	No Statments
+Label="__vbaI2Var"
+	External=TRUE
+	No Statments
+Label="__vbaErrorOverflow"
+	External=TRUE
+	No Statments
+Label="__vbaVarForNext"
+	External=TRUE
+	No Statments
+Label="__vbaFileClose"
+	External=TRUE
+	No Statments
+Label="rtcFileLength"
+	External=TRUE
+	No Statments
+Label="__vbaPut4"
+	External=TRUE
+	No Statments
+Label="__vbaFileOpen"
+	External=TRUE
+	No Statments
+Label="__vbaVarCat"
+	External=TRUE
+	No Statments
+Label="__vbaVarSub"
+	External=TRUE
+	No Statments
+Label="rtcVarBstrFromAnsi"
+	External=TRUE
+	No Statments
+Label="__vbaStrVarMove"
+	External=TRUE
+	No Statments
+Label="__vbaStrCopy"
+	External=TRUE
+	No Statments
+Label="__vbaVarTstLe"
+	External=TRUE
+	No Statments
+Label="__vbaVarTstGe"
+	External=TRUE
+	No Statments
+Label="__vbaVarForInit"
+	External=TRUE
+	No Statments
+Label="__vbaVarMove"
+	External=TRUE
+	No Statments
+Label="rtcRandomNext"
+	External=TRUE
+	No Statments
+Label="__vbaStrCmp"
+	External=TRUE
+	No Statments
+Label="__vbaFreeVar"
+	External=TRUE
+	No Statments
+Label="rtcShell"
+	External=TRUE
+	No Statments
+Label="__vbaFreeStr"
+	External=TRUE
+	No Statments
+Label="__vbaVarCopy"
+	External=TRUE
+	No Statments
+Label="__vbaStrToAnsi"
+	External=TRUE
+	No Statments
+Label="__vbaI4Var"
+	External=TRUE
+	No Statments
+Label="__vbaFreeObjList"
+	External=TRUE
+	No Statments
+Label="__vbaFreeStrList"
+	External=TRUE
+	No Statments
+Label="__vbaStrCat"
+	External=TRUE
+	No Statments
+Label="__vbaStrMove"
+	External=TRUE
+	No Statments
+Label="rtcFileCopy"
+	External=TRUE
+	No Statments
+Label="__vbaVarDup"
+	External=TRUE
+	No Statments
+Label="rtcMsgBox"
+	External=TRUE
+	No Statments
+Label="__vbaR8IntI4"
+	External=TRUE
+	No Statments
+Label="__vbaLateIdCall"
+	External=TRUE
+	No Statments
+Label="__vbaObjSet"
+	External=TRUE
+	No Statments
+Label="__vbaLateIdSt"
+	External=TRUE
+	No Statments
+Label="__vbaSetSystemError"
+	External=TRUE
+	No Statments
+Label="__vbaEnd"
+	External=TRUE
+	No Statments
+Label="__vbaFreeVarList"
+	External=TRUE
+	No Statments
+Label="__vbaFreeObj"
+	External=TRUE
+	No Statments
+Label="rtcLowerCaseVar"
+	External=TRUE
+	No Statments
+Label="__vbaVarTstEq"
+	External=TRUE
+	No Statments
+Label="__vbaOnError"
+	External=TRUE
+	No Statments
+Label="__vbaHresultCheckObj"
+	External=TRUE
+	No Statments
+Label="__vbaNew2"
+	External=TRUE
+	No Statments
+Label="__vbaAryDestruct"
+	External=TRUE
+	No Statments
+Label="__vbaAryUnlock"
+	External=TRUE
+	No Statments
+Label="__vbaAryLock"
+	External=TRUE
+	No Statments
+Label="VarPtr"
+	External=TRUE
+	No Statments
+Label="__vbaUI1I2"
+	External=TRUE
+	No Statments
+Label="__vbaDerefAry1"
+	External=TRUE
+	No Statments
+Label="__vbaUbound"
+	External=TRUE
+	No Statments
+Label="__vbaRedimPreserve"
+	External=TRUE
+	No Statments
+Label="rtcStrConvVar2"
+	External=TRUE
+	No Statments
+Label="__vbaVar2Vec"
+	External=TRUE
+	No Statments
+Label="__vbaAryMove"
+	External=TRUE
+	No Statments
+Label="EVENT_SINK_QueryInterface"
+	External=TRUE
+	No Statments
+Label="EVENT_SINK_AddRef"
+	External=TRUE
+	No Statments
+Label="EVENT_SINK_Release"
+	External=TRUE
+	No Statments
+Label="ThunRTMain"
+	External=TRUE
+	No Statments
+Label="sub_405FD8"
+	External=FALSE
+	No Statments
+Label="sub_40600C"
+	External=FALSE
+	No Statments
+Label="sub_406019"
+	External=FALSE
+	No Statments
+Label="sub_406026"
+	External=FALSE
+	No Statments
+Label="sub_40637C"
+	External=FALSE
+	No Statments
+Label="sub_4063BC"
+	External=FALSE
+	No Statments
+Label="sub_406400"
+	External=FALSE
+	No Statments
+Label="sub_40645C"
+	External=FALSE
+	No Statments
+Label="sub_4064A8"
+	External=FALSE
+	No Statments
+Label="sub_406500"
+	External=FALSE
+	No Statments
+Label="sub_406550"
+	External=FALSE
+	No Statments
+Label="sub_406598"
+	External=FALSE
+	No Statments
+Label="sub_4065FC"
+	External=FALSE
+	No Statments
+Label="sub_406658"
+	External=FALSE
+	No Statments
+Label="sub_4066A8"
+	External=FALSE
+	No Statments
+Label="sub_4067C0"
+	External=FALSE
+	No Statments
+Label="sub_406808"
+	External=FALSE
+	No Statments
+Label="sub_40684C"
+	External=FALSE
+	No Statments
+Label="sub_406894"
+	External=FALSE
+	No Statments
+Label="sub_4068E4"
+	External=FALSE
+	No Statments
+Label="sub_406A60"
+	External=FALSE
+	No Statments
+Label="sub_406BE0"
+	External=FALSE
+	No Statments
+Label="sub_406C38"
+	External=FALSE
+	No Statments
+Label="sub_406CD0"
+	External=FALSE
+	No Statments
+Label="sub_406D70"
+	External=FALSE
+	No Statments
+Label="sub_406DBC"
+	External=FALSE
+	No Statments
+Label="sub_406E4C"
+	External=FALSE
+	No Statments
+Label="sub_406E94"
+	External=FALSE
+	No Statments
+Label="sub_406EEC"
+	External=FALSE
+	No Statments
+Label="sub_406F30"
+	External=FALSE
+	No Statments
+Label="sub_406F7C"
+	External=FALSE
+	No Statments
+Label="sub_406FC0"
+	External=FALSE
+	No Statments
+Label="sub_40700C"
+	External=FALSE
+	No Statments
+Label="sub_407054"
+	External=FALSE
+	No Statments
+Label="sub_4070B0"
+	External=FALSE
+	No Statments
+Label="sub_4070F8"
+	External=FALSE
+	No Statments
+Label="sub_40713C"
+	External=FALSE
+	No Statments
+Label="sub_407180"
+	External=FALSE
+	No Statments
+Label="sub_4071C8"
+	External=FALSE
+	No Statments
+Label="sub_407210"
+	External=FALSE
+	No Statments
+Label="sub_407278"
+	External=FALSE
+	No Statments
+Label="sub_4072BC"
+	External=FALSE
+	No Statments
+Label="sub_407364"
+	External=FALSE
+	No Statments
+Label="sub_4073AC"
+	External=FALSE
+	No Statments
+Label="sub_4073F4"
+	External=FALSE
+	No Statments
+Label="sub_407444"
+	External=FALSE
+	No Statments
+Label="sub_4087EC"
+	External=FALSE
+	No Statments
+Label="sub_40882C"
+	External=FALSE
+	No Statments
+Label="sub_40887C"
+	External=FALSE
+	No Statments
+Label="sub_4088C4"
+	External=FALSE
+	No Statments
+Label="sub_40890C"
+	External=FALSE
+	No Statments
+Label="sub_408950"
+	External=FALSE
+	No Statments
+Label="sub_408994"
+	External=FALSE
+	No Statments
+Label="sub_40AAE4"
+	External=FALSE
+	No Statments
+Label="sub_40B76E"
+	External=FALSE
+	No Statments
+Label="sub_40B8A9"
+	External=FALSE
+	No Statments
+Label="sub_40E9D2"
+	External=FALSE
+	No Statments
+Label="sub_4139FF"
+	External=FALSE
+	No Statments
+Label="nullsub_1"
+	External=TRUE
+	No Statments
+Label="sub_4157FD"
+	External=FALSE
+	No Statments
+Label="sub_415DB0"
+	External=FALSE
+	No Statments
+Label="sub_405FD8"
+	External=FALSE
+	Some Statments
+Label="sub_40600C"
+	External=FALSE
+	Some Statments
+Label="sub_406019"
+	External=FALSE
+	Some Statments
+Label="sub_406026"
+	External=FALSE
+	Some Statments
+Label="sub_40637C"
+	External=FALSE
+	Some Statments
+Label="sub_4063BC"
+	External=FALSE
+	Some Statments
+Label="sub_406400"
+	External=FALSE
+	Some Statments
+Label="sub_40645C"
+	External=FALSE
+	Some Statments
+Label="sub_4064A8"
+	External=FALSE
+	Some Statments
+Label="sub_406500"
+	External=FALSE
+	Some Statments
+Label="sub_406550"
+	External=FALSE
+	Some Statments
+Label="sub_406598"
+	External=FALSE
+	Some Statments
+Label="sub_4065FC"
+	External=FALSE
+	Some Statments
+Label="sub_406658"
+	External=FALSE
+	Some Statments
+Label="sub_4066A8"
+	External=FALSE
+	Some Statments
+Label="sub_4067C0"
+	External=FALSE
+	Some Statments
+Label="sub_406808"
+	External=FALSE
+	Some Statments
+Label="sub_40684C"
+	External=FALSE
+	Some Statments
+Label="sub_406894"
+	External=FALSE
+	Some Statments
+Label="sub_4068E4"
+	External=FALSE
+	Some Statments
+Label="sub_406A60"
+	External=FALSE
+	Some Statments
+Label="sub_406BE0"
+	External=FALSE
+	Some Statments
+Label="sub_406C38"
+	External=FALSE
+	Some Statments
+Label="sub_406CD0"
+	External=FALSE
+	Some Statments
+Label="sub_406D70"
+	External=FALSE
+	Some Statments
+Label="sub_406DBC"
+	External=FALSE
+	Some Statments
+Label="sub_406E4C"
+	External=FALSE
+	Some Statments
+Label="sub_406E94"
+	External=FALSE
+	Some Statments
+Label="sub_406EEC"
+	External=FALSE
+	Some Statments
+Label="sub_406F30"
+	External=FALSE
+	Some Statments
+Label="sub_406F7C"
+	External=FALSE
+	Some Statments
+Label="sub_406FC0"
+	External=FALSE
+	Some Statments
+Label="sub_40700C"
+	External=FALSE
+	Some Statments
+Label="sub_407054"
+	External=FALSE
+	Some Statments
+Label="sub_4070B0"
+	External=FALSE
+	Some Statments
+Label="sub_4070F8"
+	External=FALSE
+	Some Statments
+Label="sub_40713C"
+	External=FALSE
+	Some Statments
+Label="sub_407180"
+	External=FALSE
+	Some Statments
+Label="sub_4071C8"
+	External=FALSE
+	Some Statments
+Label="sub_407210"
+	External=FALSE
+	Some Statments
+Label="sub_407278"
+	External=FALSE
+	Some Statments
+Label="sub_4072BC"
+	External=FALSE
+	Some Statments
+Label="sub_407364"
+	External=FALSE
+	Some Statments
+Label="sub_4073AC"
+	External=FALSE
+	Some Statments
+Label="sub_4073F4"
+	External=FALSE
+	Some Statments
+Label="sub_407444"
+	External=FALSE
+	Some Statments
+Label="sub_4087EC"
+	External=FALSE
+	Some Statments
+Label="sub_40882C"
+	External=FALSE
+	Some Statments
+Label="sub_40887C"
+	External=FALSE
+	Some Statments
+Label="sub_4088C4"
+	External=FALSE
+	Some Statments
+Label="sub_40890C"
+	External=FALSE
+	Some Statments
+Label="sub_408950"
+	External=FALSE
+	Some Statments
+Label="sub_408994"
+	External=FALSE
+	Some Statments
+Label="sub_40AAE4"
+	External=FALSE
+	Some Statments
+Label="sub_40B76E"
+	External=FALSE
+	Some Statments
+Label="sub_40B8A9"
+	External=FALSE
+	Some Statments
+Label="sub_40E9D2"
+	External=FALSE
+	Some Statments
+Label="sub_4139FF"
+	External=FALSE
+	Some Statments
+Label="sub_4157FD"
+	External=FALSE
+	Some Statments
+Label="sub_415DB0"
+	External=FALSE
+	Some Statments

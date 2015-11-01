@@ -1,0 +1,27 @@
+%% Regression level = 3
+%% Result = InValid
+%% Language = presentation
+
+i: BITVECTOR(2);
+buf: ARRAY BITVECTOR(2) OF BITVECTOR(2);
+%----------------------------------------------------
+ASSERT (BVLE(0bin00,i) AND BVLE(i,0bin11));
+
+ASSERT (BVLE(0bin00, buf[i]) AND BVLE(buf[i],0bin11));
+
+ASSERT NOT (buf[buf[i]] = 0bin00);
+
+ASSERT (BVLE(0bin00, buf[buf[i]]) AND BVLE(buf[buf[i]],0bin11));
+
+ASSERT NOT (buf[buf[buf[i]]] = 0bin00);
+
+ASSERT (buf[buf[buf[i]]] = 0bin01);
+
+ASSERT (BVLE(0bin00, buf[buf[buf[i]]]) AND BVLE(buf[buf[buf[i]]],0bin11));
+
+ASSERT NOT (buf[buf[buf[buf[i]]]] = 0bin00);
+
+ASSERT (buf[buf[buf[buf[i]]]] = 0bin01);
+%----------------------------------------------------
+QUERY FALSE;
+COUNTEREXAMPLE;

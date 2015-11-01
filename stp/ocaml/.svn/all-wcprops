@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/ocaml
+END
+stpvc.mli
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/ocaml/stpvc.mli
+END
+libstp_regerrorhandler.c
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/ocaml/libstp_regerrorhandler.c
+END
+libstp.idl
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/ocaml/libstp.idl
+END
+stpvc.ml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/ocaml/stpvc.ml
+END
+OCamlMakefile
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/ocaml/OCamlMakefile
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/ocaml/Makefile
+END

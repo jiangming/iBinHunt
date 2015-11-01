@@ -1,0 +1,11 @@
+%% Regression level = 0
+%% Result = Valid
+%% Runtime = 1
+%% Language = presentation
+
+x : BITVECTOR(4);
+y : BITVECTOR(4);
+z : BITVECTOR(4);
+QUERY(BVUMINUS(x) = BVPLUS(4, ~x, 0bin0001));
+
+

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/ocaml/tests
+END
+leak_exp.ml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/ocaml/tests/leak_exp.ml
+END
+test_libstp.ml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/ocaml/tests/test_libstp.ml
+END
+leak_type.ml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/ocaml/tests/leak_type.ml
+END
+leak_vc.ml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/stp/ocaml/tests/leak_vc.ml
+END

@@ -1,0 +1,202 @@
+
+\section{Weakest Pre-Condition}\label{sec:wp}
+
+\subsection{Background}
+
+Let \prog be a program, and $Var(\prog) = <v_1, v_2, ..., v_k>$ be the
+set of program variables. In assembly, we consider all registers
+including the instruction counter and memory locations program
+variables.  The {\it state space} of the program is the cross product
+of all variables: $v_1 \times v_2 \times ... \times v_k$.  A predicate
+on the state space is a function on state-space variables which
+returns either true (\true) or false (\false).   
+
+Let $Q$ be a predicate on the state space of \prog. There are three
+thing that can happen when we run \prog:
+\begin{enumerate}
+\item \prog can terminate in a state satisfying $Q$
+\item \prog can terminate in a state satisfying $\neg Q$. 
+\item \prog does not terminate.
+\end{enumerate}
+
+The {\it weakest pre-condition} $wp(\prog, Q)$ characterizes the
+minimium requirements on the pre-states for which running \prog will
+terminate in a state satisfying $Q$.  In other words, activating
+$\prog$ in a state satisfying $wp(\prog,Q)$ is {\it gaurenteed} to
+{\it terminate} in a state satisfying $Q$.  $wp(\prog,Q)$ is called
+the weakest pre-condition because there may be stronger pre-conditions
+$Q_s$ which also result in the program terminating in a state
+satisyfing $Q$, i.e., $P_s \rightarrow wp(\prog,Q)$.  Thus, the set of
+states characterized by $P_s \subseteq wp(\prog,Q)$. 
+
+For example, to calculate whether \prog will always correctly
+terminate, we calculate $wp(\prog, \true)$ because:
+\[
+ wp(\prog, Q) \wedge wp(\prog, \neg Q) \equiv wp(\prog, Q \wedge \neg
+ Q) \equiv wp(\prog, \true)
+\]
+
+The {\it weakest liberal pre-condition} $wlp(\prog,Q)$ characterizes
+the minimum requirements on the pre-states for which running \prog
+will terminate in a state satisfying $Q$ if it terminates at
+all. $wlp$ is more liberal because it only guarentees \prog won't
+terminate in a wrong state: it does not gaurtee the program terminates.
+
+We can therefore define 7 possible outcomes~\cite{dijkstra:1976}:
+\begin{enumerate}
+\item Activation of \prog will establish $Q$: \\
+$wp(\prog, Q) = wlp(\prog, Q) \wedge wp(\prog, \true)$
+\item Activation of \prog will establish $\neg Q$:\\
+$wp(\prog, \neg Q) = wlp(\prog, \neg Q) \wedge wp(\prog, \true)$ 
+\item Activation will fail to lead to a terminating state:\\
+$wlp(\prog, \false) = wlp(\prog, Q) \wedge wlp(\prog, \neg Q)$
+\item Activation will lead to a terminating state, but the initial
+  state is insufficient to determine if $Q$ is satisfied:\\
+$wp(\prog, \true) \wedge \neg(wlp(\prog, Q) \wedge \neg wlp(\prog,
+  \neg Q)$
+\item If activiation leads to a final state, then it will satisfy
+  $Q$, but the initial state does not determine whether the activity
+  will terminate:\\
+$wlp(\prog, Q) \wedge \neg wp(\prog, \true)$
+\item If activiation leads to a final state, then that state will not
+  satisfy $Q$. However, the initial state does not tell us whether we
+  will terminate:\\
+$wlp(\prog, \neg Q) \wedge \neg wp(\prog, \true)$
+\item The initial state does not determine whether or not we will
+  satisfy $Q$ or terminate:\\
+$\neg (wlp(\prog, Q) \vee wlp(\prog, \neg Q) \vee wp(\prog, \true))$
+\end{enumerate}
+The last four possibilities only exist for non-deterministic machines.
+
+Two important final notes. First, weakest pre-conditions are
+monotonic: if $Q_1 \rightarrow Q_2$ then $wp(\prog, Q_1) \rightarrow
+wp(\prog, Q_2)$. Second, $wp(\prog, \false) = \false$ always
+(this is sometimes referred to as the principle of excluded miracle).
+
+\subsection{The Guarded Command Language (GCL)}
+
+\input{gcl}
+
+The weakest pre-condition is calculated in a syntax-directed manner
+from the {\it guarded command language} (GCL), which is shown in
+Table~\ref{tab:gcl}.  Later we will describe how we translate our
+assembly into GCL.
+
+An {\bf assert} statement asserts than an expression is
+true.  If the expression is false, the assert blocks and the
+computation has {\it gone wrong} along that path. If the asserted
+expression is true, then the assert block is equivilant to a nop. For
+example, {\bf assert}(\false) can be used to indicate an infeasible
+path.
+
+An {\bf assume} statement adds an assumption about the expression. For
+example, {\bf assume}($x > 5$) would restrict $x$ to the values
+greater than $5$ in all subsequent computation.
+
+GCL also offers assignments, sequences ($A ; B$), {\bf skip} which is
+equivilant to a nop, and the logical constants.
+
+The GCL statement $A \Box B$, pronounced A {\it bar} B, is a choice
+statement between either $A$ or $B$. For example, we can write an
+if-then-else statement {\tt if e then A else B} as {\tt (assume(e);
+A;) $\Box$ ($\neg$assume(e);B)}.
+
+Note that at this time we do not have constructs for loops. The reason
+is that calculating the weakest pre-condition for a loop requires
+additional information about the behavior of the loop that cannot be
+determined syntatically (or necessarily statically). Therefore, for
+now we focus on loopless programs.
+
+\subsection{Calculating the weakest pre-condition}
+
+\input{wprules}
+
+The weakest pre-condition is calculated in a syntax-directed manner
+from the guarded command language (GCL), as shown in
+Table~\ref{tab:wpcalculation}.  Each rule is of the form $S | Q$,
+which should be read as given $S$, we output pre-condition $Q$.  For
+example, $wp(s_1; s_2; s_3, Q)$ is computed as $wp(s_1, wp(s_2,
+wp(s_3, Q)))$.
+
+When we encounter an assignment statement $wp({\tt lv := e},Q)$, we
+substitute all occurances of {\tt lv} in $Q$ for $e$. Substitution is
+written $Q (t/x)$ which means substitute all occurances of $x$ for $t$
+in $Q$.  Substitution is formally defined in
+Table~\ref{tab:substitution}. This captures the semantics of
+assignment in a logical form.  Replacing ``all occurances'' requires
+some thought, however, when faced with memory references.  The central
+problem with memory references is that two memory references may be
+aliased. For example, we may have \textsc{mem}$[x]$ =
+\textsc{mem}$[y]$ when $x = y$.  However, we cannot determine
+statically when $x = y$, e.g., if either $x$ or $y$ is symbolic there
+may be some values where $x = y$ and some where $x \neq y$.
+
+Therefore, during substitution we rely on an auxilary {\it alias}
+function which for {\tt alias(x,y)} returns one of three values: \true
+if $x$ and $y$ {\it must} be aliased, \false if $x$ and $y$ are
+{\it definitely not} aliased, and {\bf M} if $x$ and $y$ {\it may}
+be aliased (but are not definitely aliased, e.g., may and must do not
+overlap).  Note returing {\bf M} is always sound, and can be used in
+luei of real alias analysis.
+
+
+\paragraph{Using the weakest pre-condition}
+The weakest pre-condition $wp(\prog, Q)$ is also a binary predicate
+over the state space of the program.  Thus, if the state space is
+$n$-dimensions, the weakest pre-condition will define some
+$n$-dimensional sub-space.
+
+In our project, we often want to find a binding of values to variables
+which appear in $wp(\prog,Q)$, which we call {\it solving} the
+weakest pre-condition. It is important to keep in mind that we are
+using the term ``solving'' loosely: we are simply finding a single
+point in the solution space.  We discuss how we find a solution later.
+
+
+\subsection{Efficient weakest pre-condition calculation}
+The weakest pre-condition computation algorithm above is an adaption
+of traditional methods, dating back to Dijkstra in
+1976~\cite{dijkstra:1976}.  The weakest pre-condition calculation as
+presented may result in a pre-condition that is exponential in the
+program size.  For example, consider:
+\[
+\begin{array}{l}
+x_1 = x_0 + x_0 \\
+x_2 = x_1 + x_1 \\
+x_3 = x_2 + x_2 \\
+... \\
+x_n = x_{n-1}+ x_{n-1}
+\end{array}
+\]
+Post-conditions involving $x_n$ will result in an exponentially sized
+pre-condition. For example, if $Q = x_3 < 5$, then the resulting
+weakest pre-condition  is:
+\[
+((x_0 + x_0) + (x_0 + x_0))  + ((x_0 + x_0) + (x_0 + x_0)) < 5
+\]
+
+
+To address the size issue, we can simply use {\tt let}-bindings for
+all assignments.  The resulting pre-condition will be linear in the
+size of the program.  Again, if $Q = x_3 < 5$, the weakest
+pre-condition is:
+\begin{tabbing}
+let \= $x_1 = x_0 + x_0$  in \\
+\>let \= $x_2 = x_1 + x_0$  in \\
+\>\>let \= $x_3 = x_2 + x_2$  in \\
+\>\>\> $x_3 < 5$
+\end{tabbing}
+
+
+Note by using {\tt let} bindings we have simply reduced the space for
+representing the weakest pre-condition: we have not necessarily
+reduced the complexity of solving the formula (i.e., instantiating
+values for variables such that the weakest pre-condition is true).
+
+{\it There will be more added here later.}
+
+\subsection{Other Notes}
+
+The standard references for weakest-preconditions
+are~\cite{dijkstra:1976,cohen:1990}. 
+

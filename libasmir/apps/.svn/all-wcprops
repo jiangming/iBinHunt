@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/apps
+END
+symeval.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/apps/symeval.cpp
+END
+translate-function.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/apps/translate-function.cpp
+END
+Makefile.in
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/apps/Makefile.in
+END
+ir_printer.h
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/apps/ir_printer.h
+END
+interpreter.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/apps/interpreter.cpp
+END
+print-ir.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/apps/print-ir.cpp
+END
+print-stripped.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/apps/print-stripped.cpp
+END
+gen_thunks.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/apps/gen_thunks.cpp
+END
+symeval.h
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/apps/symeval.h
+END
+Makefile.am
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/apps/Makefile.am
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/apps/Makefile
+END
+disassembler.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/apps/disassembler.cpp
+END
+ir_printer.cpp
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/apps/ir_printer.cpp
+END

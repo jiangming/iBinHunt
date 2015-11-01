@@ -1,0 +1,11 @@
+%% Regression level = 0
+%% Result = Valid
+%% Runtime = 1
+%% Language = presentation
+
+x : BITVECTOR(4);
+y : BITVECTOR(4);
+z : BITVECTOR(4);
+QUERY( BVPLUS(4, x, BVSUB(4, y, x)) = y);
+
+

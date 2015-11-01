@@ -1,0 +1,87 @@
+import "libasmir.idl"; 
+
+typedef [null_terminated] Stmt* StmtList;
+typedef [null_terminated] Exp* ExpList;
+
+typedef [int32] unsigned int uint32_t;
+typedef long long uint64_t;
+
+// from appreplay/exectrace_c.h
+
+[null_terminated]
+Stmt* simplelog_to_ir_trace_c([string] char *progname,
+			       [string] char *tracename,
+			       address_t first_eip,
+			       address_t last_eip)
+  quote(dealloc, "free(_res);");
+
+[null_terminated]
+Stmt* taintlog_to_ir_trace_c([string] char *binname,
+			     [string] char *tracename,
+			     address_t first_eip,
+			     address_t last_eip,
+			     int concrete_init_input,
+			     int include_all)
+  quote(dealloc, "free(_res);");
+
+ExpList cjmps_to_temps_c([in,out] StmtList *stmts)
+  quote(dealloc, "free(_res);");
+
+// from libasmir/src/include/disasm.h
+
+enum OpType { TNone = 0, TRegister, TMemLoc, TImmediate, TJump, TFloatRegister };
+
+typedef struct {
+  address_t address;
+
+  // ugly hack to get the struct size consistent.
+  // ocamlidl is supposed to take care of this, but i can't get it to
+  // work that way
+  char dummy[100]; // sizeof(Instruction) - sizeof(Instruction.address)
+
+  //  bfd_byte opcode[3]; 
+  //  unsigned int prefixes;
+  //  bfd_byte modrm;
+  //  Operand ops[3];
+  //  unsigned char length;
+  //  struct _segment *segment;
+  //  struct disassemble_info *info;
+  /* CFG information */
+  //  Queue *children;
+  //  Queue *ancestors;
+  //  int cfg, visited;
+  //  bool operator<(const struct i386_instruction & other)
+  //  { return this->address < other.address; };
+} Instruction;
+
+// from appreplay/ttrace.h
+
+typedef struct {
+    [mlname(optype)] enum OpType type; 
+    address_t addr;
+    uint32_t value; 
+    uint64_t tainted;
+    uint32_t origin[4]; 
+    uint32_t offset[4]; 
+} OperandVal; 
+
+typedef struct {
+    Instruction inst; 
+    char rawbytes[10]; 
+    OperandVal operand[5];
+    OperandVal memregs[3][3];
+    OperandVal esp; 
+
+    uint32_t eflags; 
+    uint32_t cc_op; 
+    uint32_t df; 
+    uint32_t hflags; 
+    uint32_t ldt; 
+    uint32_t gdt;
+    uint32_t tr; 
+    uint32_t idt;     
+} EntryHeader; 
+
+EntryHeader parse_EntryHeader ([string,in] char *buf);
+
+int sizeof_EntryHeader();

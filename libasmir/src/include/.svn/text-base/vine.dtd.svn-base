@@ -1,0 +1,59 @@
+<!-- DTD for VinE's XML representation, version 1.0
+http://miyazaki.ece.cmu.edu/vine/
+ -->
+
+<!ENTITY % type "(REG_1|REG_8|REG_16|REG_32|REG_64)">
+<!ENTITY % unop "(NEG|NOT)">
+<!ENTITY % binop "CDATA"> <!-- for now... -->
+<!ENTITY % casttype "(Unsigned|Signed|High|Low|Float|Integer|ReinterpFloat|ReinterpInteger)">
+
+<!ENTITY % typeattrs
+ "type		%type;		#REQUIRED"
+  >
+
+
+<!ENTITY % stmt "(move|comment|expstmt|label|jmp|cjmp|special)">
+<!ENTITY % exp "(name|cast|unknown|mem|phi|temp|constant|unop|binop|let|if)">
+
+<!ELEMENT vine (%stmt;)* >
+
+<!-- Statement types -->
+<!ELEMENT move ((mem|temp), %exp;)>
+<!ELEMENT comment (#PCDATA)>
+<!ELEMENT expstmt %exp;>
+<!ELEMENT label (#PCDATA)>
+<!ELEMENT jmp %exp;>
+<!ELEMENT cjmp (%exp;, %exp;, %exp;)>
+<!ELEMENT special (#PCDATA)>
+
+<!-- Expression types -->
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT cast %exp;>
+<!ATTLIST cast
+  %typeattrs;
+  casttype	%casttype;	#REQUIRED
+>
+<!ELEMENT unknown (#PCDATA)>
+<!ELEMENT mem %exp;>
+<!ATTLIST mem
+  %typeattrs;
+>
+<!ELEMENT phi (#PCDATA)*>
+<!ELEMENT temp (#PCDATA)>
+<!ATTLIST temp
+  %typeattrs;
+>
+<!ELEMENT constant (#PCDATA)>
+<!ATTLIST constant
+  %typeattrs;
+>
+<!ELEMENT unop %exp;>
+<!ATTLIST unop
+  type		%unop;		#REQUIRED
+>
+<!ELEMENT binop (%exp;, %exp;)>
+<!ATTLIST binop
+  type		%binop;		#REQUIRED
+>
+<!ELEMENT if (%exp;, %exp;, %exp;)>
+<!ELEMENT let (%exp;, %exp;, %exp;)>

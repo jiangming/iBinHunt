@@ -1,0 +1,139 @@
+% IR static semantics
+
+%% Metavariables used: $i$ for immediate value, $v$ for variable name,
+%% $e$ for expression, $\tau$ for type.
+
+\subsubsection{Types}
+Our basic types are: {\tt uint64\_t}, {\tt uint32\_t}, {\tt
+uint16\_t}, {\tt uint8\_t}, {\tt int64\_t}, {\tt int32\_t}, {\tt
+int16\_t}, {\tt int8\_t}, {\tt Bool}, and {\tt address\_t}. 
+
+
+We maintain a typing context $\Gamma$, which is simply a sequence of
+variables (i.e., Temp's) and their types (denoted $v:\tau$ for $v$ is
+of type $\tau$).  In our typing rules below ``()'' denotes the unit
+type, and ``\_'' denotes we don't care about the value. The rules can
+be read as an algorithm: we can conclude the bottom if we check the
+top, e.g., the type of Move is unit if we first check $e_1$ and see if
+it is a valid l-value, then make sure $e_2$ is a valid type.
+
+{\it Note the following rules are slightly broken (and will be
+fixed). However, they should for the most part give you a good idea
+what we expect when forming expressions and statements.}
+
+{\bf Expression Types}: \\
+\[
+\setlength\extrarowheight{15pt}
+\begin{array}{cc}
+% In array, add extra space in-between rows.
+\infer[\textsc{t-temp}]{\Gamma \vdash \text{Temp}(\tau,x):\tau}
+{ \text{Temp}(\tau, x) \in \Gamma} &
+\infer[\textsc{t-const}]{\Gamma \vdash \text{Constant}(\tau,x):\tau}{}\\
+\infer[\textsc{t-unop}]{\Gamma \vdash \text{UnOp}(\circ,t_1) : \tau}
+{\Gamma \vdash t_1 : \tau & \circ \in \text{unop\_type}} &
+\infer[\textsc{t-name}]{\Gamma \vdash \text{Name(\_)} : address\_t}{}\\
+\infer[\textsc{t-phi}]{\Gamma \vdash \text{Phi}(\_, e) :
+\tau} {\Gamma \vdash e : \text{Temp list} &  \forall x \in e | \Gamma
+\vdash x:\tau } &
+\infer[\textsc{t-unknown}]{\Gamma \vdash \text{Unknown}(\_) :\top}{} \\
+\infer[\textsc{t-mem}]{\Gamma \vdash \text{Mem}(\tau, e) :
+address\_t}{\Gamma \vdash e: address\_t}
+& 
+\infer[\textsc{t-address}]{uint32\_t : address\_t}{}
+\\
+\end{array}
+\]
+\[
+\setlength\extrarowheight{15pt}
+\begin{array}{c}
+\infer[\textsc{t-binop-arith}]{\Gamma \vdash \text{BinOp}(\circ,t_1,
+t_2):\tau} 
+{\Gamma \vdash t_1 :\tau &  \Gamma \vdash t_2:\tau  & 
+\circ \in \text{arith\_bops}}\\
+\infer[\textsc{t-binop-bool}]{\Gamma \vdash \text{BinOp}(\circ,t_1,
+t_2) : \bool}{\Gamma \vdash t_1 :\tau &  \Gamma \vdash t_2:\tau  &{\circ \in \text{rel\_bops}} }\\
+\end{array}
+\]
+\\
+{\bf Statement Types:}
+\[
+\setlength\extrarowheight{15pt}
+\begin{array}{cc}
+\infer[\textsc{t-jmp}]{\Gamma \vdash \text{Jmp}(e) : ()}
+{ \Gamma \vdash e : \text{Name} \vee e : address\_t} &
+\infer[\textsc{t-cjmp}]{\Gamma \vdash \text{CJmp}(e_1, e_2, e_3) : ()}
+{\Gamma \vdash e_1:\text{Bool} & \Gamma \vdash e_1, e_2  : address\_t} \\
+\infer[\textsc{t-move}]{\Gamma \vdash \text{Move}(e_1, e_2) :() }
+{\Gamma \vdash e_1 : LVal & \Gamma \vdash e_2 :
+\tau} &
+\infer[\textsc{t-special}]{\Gamma \vdash \text{Special}(e) :
+()}{}\\
+\infer[\textsc{t-label}]{\Gamma \vdash \text{Label}(e) : ()}
+{\Gamma \vdash e:\text{string}} &
+\infer[\textsc{t-expstmt}]{\Gamma \vdash \text{ExpStmt}(e) : () }
+{\Gamma \vdash e:\tau} \\
+\infer[\textsc{t-comment}]{\Gamma \vdash \text{Comment}(e) : () }
+{ \Gamma \vdash e : \text{string}}\\
+\end{array}
+\]
+
+%% \subsubsection{Types of Expressions}
+
+%% \[
+%% \begin{array}{c}
+%% \infer[\text{T-Var}]{\Gamma \vdash x:\tau}{\text{Temp}(x,\tau) \in \Gamma}\\
+%% \infer[\text{T-Unsigned}]{\text{uint8\_t} <: \text{uin16\_t} <: uint32\_t <:
+%% uint64\_t}{} \\
+%% \infer[\text{T-Signed}]{\text{int8\_t} <: ... }{}\\
+%% \infer[\text{T-BinOp}]{BinOp(op, x_1, x_2) : \tau_2}{\Gamma,x_1:\tau_1 &
+%% \Gamma,x_2:\tau_2 & \tau_1 <: \tau_2 }\\
+%% \end{array}
+%% \]
+
+
+%% \begin{mathpar}
+%% \infer[Const]{ } { \mathtt{Constant}(i : \tau) : \tau}
+%% \and
+%% \infer[Temp]{ } { \mathtt{Temp}(v : \tau) : \tau}
+%% \and
+%% \infer[Name]{ } {\mathtt{Name}(v) : (UNSIGNED, ???)}
+%% \and
+%% % Um, how do we say \tau is any integer type?
+%% \infer[Binop-Int]{\circ \in \{ MOD, LSHIFT, RSHIFT, ARSHIFT, LROTATE, RROTATE, LOGICAND, LOGICOR, BITAND, BITOR, XOR\} \\ e_1 : \tau \\ e_2 : \tau \\ \tau \in Integer \cup Unsgined} { e_1 \circ e_2 : \tau}
+%% \and
+%% \infer[Binops-Arr]{\circ \in \{ PLUS, MINUS, TIMES, DIVIDE,\} \\ e_1 : \tau \\ e_2 : \tau} { e_1 \circ e_2 : \tau}
+%% \and
+%% \infer[Binops-Rel]{\circ \in \{ EQ, NEQ, GT, LT, GE, LE \} \\ e_1 : \tau \\ e_2 : \tau} {e_1 \circ e_2 : \mathtt{Bool}}
+%% \and
+%% \infer[Unop]{\diamond \in \{ NEG, NOT, BNOT \} \\ e : \tau} {\diamond e : \tau}
+%% \and
+%% \infer[Phi]{ e_0 : \tau \\ ... \\ e_n : \tau} {\Phi_v(e_0, ..., e_n) : \tau}
+%% \and
+%% \infer[Mem]{e : \tau \\ \tau = (UNSIGNED, ???)} {\mathtt{Mem}(e, \tau') : \tau'}
+%% \and
+%% \infer[Cast-Wide]{c \in \{ CAST\_SIGNED, CAST\_UNSIGNED \} \\ e : (k???,w) \\ w < w'} {\mathtt{Cast}(c,w',e) : (k,w')}
+%% \and
+%% \infer[Cast-Narrow]{c \in \{ CAST\_LOW, CAST\_HIGH\} \\ e : (k,w) \\ w > w' }{\mathtt{Cast}(c, w', e) : (k,w')}
+%% \and
+%% \infer[Cast-Int]{c \in \{ CAST\_INTEGER, CAST\_RINTEGER \} \\ e : (FLOAT,w) } {\mathtt{Cast}(c,w,e) : (INTEGER,w)}
+%% \and
+%% \infer[Cast-Float]{c \in \{ CAST\_FLOAT, CAST\_RFLOAT \} \\ e : (k,w) } {\mathtt{Cast}(c,w,e) : (FLOAT,w)}
+%% \end{mathpar}
+
+
+%% \subsubsection{Types of statements}
+%% \begin{mathpar}
+%% \infer[Label]{ }{\mathtt{Label} s : ()}
+%% \and
+%% \infer[Comment]{ }{\mathtt{Comment} s : ()}
+%% \and
+%% \infer[Special]{ }{\mathtt{Special} s : ()}
+%% \and
+%% \infer[Jmp]{e:Address} {\mathtt{Jmp}(e) : ()}
+%% \and
+%% \infer[CJmp]{e_1:Bool\\ e_2:Address \\ e_3:Address}{\mathtt{CJmp}(e_1, e_2, e_3) : ()}
+%% \and
+%% \infer[Move]{e_1:\tau \\ e_2 : \tau \\ e_1 \in \{ \mathtt{Mem}, \mathtt{Temp} \} } {\mathtt{Move}(e_1,e_2) : ()}
+%% \and
+%% \infer[ExpStmt]{e : \tau}{\mathtt{ExpStmt} e : ()}
+%% \end{mathpar}

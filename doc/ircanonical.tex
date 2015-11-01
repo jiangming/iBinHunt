@@ -1,0 +1,45 @@
+
+For the purpose of determining whether two expressions are equivalent,
+we compare their canonicalized forms for structural equality. This is
+used for eg. alias analysis.
+
+The cannonical order for subexpressions is:
+\begin{enumerate}
+\item Constants (ordered in descending order by value) %first
+\item Name (ordered alphabetically)
+\item Temp (ordered alphabetically)
+\item Mem (ordered by their addresses)
+\item FIXME: define the others
+\item Unknown (ordered alphabetically) %last
+\end{enumerate}
+Note: \texttt{Let} is excluded from the ordering, because it will not
+appear in subexpressions.
+
+An expression is in canonical form when:
+\begin{itemize}
+\item
+The only \texttt{Let}s are \texttt{Let}s which may alias part of its
+subexpression, but only in cases when it cannot be determined that
+there is definite aliasing.
+
+\item
+All \texttt{Let}s are on the outside of the expression, ordered in the
+cannonical order by their addresses, from outside to inside.
+
+\item
+All associative binops, are associated to the right.
+
+\item
+  All commutative binops have their subexpressions in the cannonical order, from right to left:
+
+
+\item
+No more constant folding can be performed.
+
+\item
+It contains no product of sums.
+
+
+\item
+FIXME: Need more.
+\end{itemize}

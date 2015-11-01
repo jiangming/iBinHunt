@@ -1,0 +1,13 @@
+K 10
+svn:ignore
+V 117
+Makefile.in
+Makefile
+fpu-28-108
+cachegrind.out
+cachegrind.out.*
+*.stdout.diff
+*.stderr.diff
+*.stdout.out
+*.stderr.out
+END

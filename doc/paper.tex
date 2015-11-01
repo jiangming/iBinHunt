@@ -1,0 +1,33 @@
+\documentclass[11pt,twoside,letter]{article}
+\usepackage{fullpage}
+\usepackage{url}
+\usepackage[draft]{djb}
+\usepackage{shortcuts}
+\usepackage{proof}
+\usepackage{mathpartir}
+
+
+\title{\vine Project Documentation}
+\author{David Brumley}
+\date{Warning: This document is intended to give an overview of the
+  language. The exact semantics are subject to change. }
+\pagestyle{fancyplain}
+
+\begin{document}
+\maketitle
+\input{overview}
+\input{adminstrative}
+\input{x86overview}
+\input{disassemble}
+%\input{ir}
+\input{vine-formalism}
+
+\input{wp}
+
+\bibliographystyle{plain}
+\bibliography{biblio}
+\appendix
+%\input{notes}
+
+
+\end{document}

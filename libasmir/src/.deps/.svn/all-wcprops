@@ -1,0 +1,161 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps
+END
+gen_thunks.Po
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/gen_thunks.Po
+END
+asm_program.Po
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/asm_program.Po
+END
+irtoir.Po
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/irtoir.Po
+END
+typecheck_ir.Po
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/typecheck_ir.Po
+END
+irtoir_c.Po
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/irtoir_c.Po
+END
+ir2xml.Po
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/ir2xml.Po
+END
+const_simplify_exp.Po
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/const_simplify_exp.Po
+END
+irtoir-arm.Po
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/irtoir-arm.Po
+END
+debug.Po
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/debug.Po
+END
+ssa.Po
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/ssa.Po
+END
+stmt.Po
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/stmt.Po
+END
+deadcode.Po
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/deadcode.Po
+END
+stmt_c.Po
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/stmt_c.Po
+END
+irvisitor.Po
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/irvisitor.Po
+END
+info.Po
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/info.Po
+END
+defusevisitor.Po
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/defusevisitor.Po
+END
+irdeendianizer.Po
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/irdeendianizer.Po
+END
+exp.Po
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/exp.Po
+END
+translate.Po
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/translate.Po
+END
+vexir.Po
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/vexir.Po
+END
+exp_c.Po
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/exp_c.Po
+END
+irtoir-i386.Po
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/irtoir-i386.Po
+END
+cfg.Po
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/cfg.Po
+END
+objdump.Po
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/objdump.Po
+END
+ir_program.Po
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/ir_program.Po
+END
+vexmem.Po
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/src/.deps/vexmem.Po
+END

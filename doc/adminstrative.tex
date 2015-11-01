@@ -1,0 +1,154 @@
+%%
+%% adminstrative.tex
+%% 
+%% Made by David Brumley
+%% Login   <dbrumley@gs3102.sp.cs.cmu.edu>
+%% 
+%% Started on  Fri Apr 27 10:28:37 2007 David Brumley
+Last update Fri Apr 27 11:52:19 2007 David Brumley
+%%
+
+\section{Administrative Details}
+
+There are many different projects using the \vine source code.  This
+section describes how we organize our code, how we write code, and how
+we create projects around the code. There are a few \emph{fundamental
+  rules} we all follow:
+
+{\bf Fundamental Rules:}
+\begin{itemize}
+  \item Make API's and do not break others API's.
+  \item Document your source code using ocamldoc-style comments for
+  ocaml, or doxygen style-comments for C/C++.
+  \item Do not check into trunk unless make succeeds.
+  \item Only check source code into trunk.
+  \item Do not check into trunk unless the regression tests pass.
+  \item Make a regression test for any API you care about not
+  breaking. If you don't write a regression test, others may
+  inadvertently break your code without knowing.
+\end{itemize}
+
+If you follow these basic rules, everyone should be happy. 
+
+\subsection{Subversion}
+We use subversion to manage our code. Everyone should be familiar with
+the basics of subversion.  A good introductory (and free)
+book is available at \url{http://svnbook.red-bean.com/}.
+
+The main subversion repository for \vine is at
+\url{https://hayao.ece.cmu.edu/svn/vine}. The repository is currently
+organized as follows:
+
+\begin{itemize}
+  \item trunk - the activate development source code branch.  When you
+  check into trunk, it is expected that the top-level make succeeds.
+  \begin{itemize}
+  \item ocaml - the vine library. applications should not go in this
+  directory.
+  \item libasmir - the asmir library, used for translating from
+  assembly to our IR.
+  \item $<${\it project}$>$ - a project directory, e.g., an
+  application.
+  \end{itemize}
+  \item branches - source code branches. More on branches below.
+  \item tags - tagged versions of the code. Tags correspond to
+  releases or to major checkpoints. We generally create a new tag
+  version after every paper.
+  \item results - this is where you put results for your project,
+  including test cases, source code, or whatever you think is relevant
+  to your research project.
+  \item regression - regression tests for vine.
+\end{itemize}
+
+\subsubsection{Code Branches}
+Everyone should keep their active code development in subversion. This
+is for your own protection: our subversion machine is backed up
+regularly, while your local machine may not be. 
+
+When you are working on changing code in a way that is incompatible or
+requires major changes over multiple days to the main trunk, you
+should create a code \emph{branch}. A branch is an independent line of
+development.  Branches allow you to use subversion (thus not keeping
+all your work on your local machine), while still not breaking the
+fundamental rules. 
+
+The subversion book~\cite{subversionbook} has good documentation on
+how to make and merge branches appropriately.
+
+
+\subsection{Regression Tests}
+For each project, there should be a set of regression tests.
+In general, we have two types of regression types: micro-tests and
+macro-tests.  
+
+Micro-tests are tests in which you can specify the ``right'' answer.
+Micro-tests are typically written by hand in the \vine IR. Micro-tests
+are intended to exercises a specific component in as many ways as you
+think are appropriate. Micro-tests, since they are small, generally
+also allow us to more easily debug problems.
+
+Macro-tests are generally real-life tests, e.g., test the scalability
+of your code. You should again generally know the ``right'' answer,
+but it maybe harder to debug.
+
+Each test should have a ``test.sh'' script which when executed returns
+0 (zero) for success and something else for failure.  We have a
+top-level test.sh, which is executed over all regression tests.
+
+
+\subsection{Writing Code}
+When you write code, please try and design a proper API and use others
+API's.  If code doesn't do what you want it to do, ask the author, or
+design an API yourself.  API's should be specified in ``.mli'' files
+for ocaml, and in ``.h'' files for C/C++. Code should be
+documented. For API's, you should include documentation for all
+parameters, and what the API returns. 
+
+More particularly:
+\begin{itemize}
+  \item When writing C code, use GNU 'indent' to indent your code.
+  {\url https://hayao.ece.cmu.edu/vine/wiki/wiki/indent} has one
+  recommended indent package.
+\item When writing C/C++ code, use doxygen-style comments.
+\item When writing ocaml code, using ocamldoc-style comments.  
+\item When writing ocaml code, I recommend using emacs in
+  tuareg-mode. In ubuntu, this can be installed as 'tuareg-mode'.
+\item Keep lines under 80 characters long. 
+\end{itemize}
+
+
+\subsection{The Wiki and Bugs}
+
+We use a wiki to keep track of projects and bugs.  The wiki has random
+relevant information.  We primarily use the wiki to keep track of
+information everyone should know about, and for its bug-tracking
+system.
+
+
+You should create a bug report when something is broken and you don't
+fix it yourself. When you create a bug report, please be as specific
+as you can. A good bug report also includes a specific example, what
+is broken about the example, and what the correct output should be.
+
+We also use the bug-reporting system to keep track of new features we
+want. For example, if during your research project you find that some
+additional functionality would be great, but don't have time to
+implement it yourself, add a ticket as a ``feature request''.
+
+As a general rule, bugs should be actionable items --- someone should
+end up fixing it. Feature requests need not be actionable; they are
+there as a reminder.
+
+\subsection{Creating a New Project}
+When you want to create a new project, you should:
+\begin{itemize}
+  \item Create a directory in the trunk directory to hold your source
+  code.
+  \item Create a directory in the results directory to hold your
+  examples.
+  \item Create a set of regression tests, if appropriate.
+  \item Create a sub-page off the wiki describing your project.
+\end{itemize}
+
+
+

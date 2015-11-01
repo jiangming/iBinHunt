@@ -1,0 +1,14 @@
+K 10
+svn:ignore
+V 134
+cachegrind-amd64-linux
+cachegrind-ppc32-linux
+cachegrind-ppc64-linux
+cachegrind-x86-linux
+cg_annotate
+.deps
+Makefile
+Makefile.in
+*.so
+
+END

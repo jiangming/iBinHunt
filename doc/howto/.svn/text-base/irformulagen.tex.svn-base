@@ -1,0 +1,103 @@
+\section {Generating the IR and the STP formula}
+
+We start with a trace (generated, for instance, by TEMU) that records
+the instructions executed on a program run, the data values they
+operated on, and which data values were derived from a distinguished
+set of (``tainted'') input values. We're going to do operations where
+we consider that input to be a symbolic variable, but the first step
+is to interpret the trace. The x86 instructions in the trace are a
+pretty obscure representation of what is actually happening in the
+program, so we'll translate them into a cleaner intermediate
+representation (IR) language.
+
+First, let us check if we have got a meaningful trace.  One way to do
+so is to print the trace, and see that at least the expected
+instructions are marked as tainted.  For this, you may use the
+\texttt{trace\_reader} command utility in Vine. As shown below, in the
+output you should be able to see the compare (or similar) instruction
+that comapares the input to the immediate value 5. The presence of
+tainted operands in any instruction are indicated by the record
+containing ``T1''.
+
+\begin{Verbatim}[fontsize=\relsize{0}, frame=lines, framesep=.5em]
+
+% cd bitblaze/vine
+% ./utils/trace_reader -trace /tmp/foo.trace | grep T1
+...
+...
+804845a:       cmpl    $0x5,-0x4(%ebp)   I@0x00000000[0x00000005] \
+       T0      M@0xbffffac4[0x00000005]        T1 {15 (1001, 0) (1001, 0) \
+	 (1001, 0) (1001, 0) } 
+
+\end{Verbatim}
+%$
+
+Of course, the real output of that command contains lots of
+instructions, but we've picked out a key one: an instruction from the
+main program (you can tell because the address is in the \verb'0x08000000'
+range) in which a value from the stack (\verb'-0x4(%ebp)') is
+compared (a \verb'cmpl' instruction) with a constant integer 5
+(\verb'$0x5').%$
+The later fields on the line represent the instruction operands and
+their tainting.
+
+We can then use a single program, the \texttt{appreplay} utility, to
+both convert the trace into IR for and then to generate an STP formula
+given the constraints on the symbolic input. The invocation looks
+like:
+\begin{Verbatim}[fontsize=\relsize{0}, frame=lines, framesep=.5em]
+% ./utils/appreplay -trace /tmp/foo.trace -use-thunks false -use-post-var true \
+  -stp-out foo.stp -ir-out foo.ir -wp-out foo.wp
+...
+Time to create sym constraint from TM: 0.480301
+\end{Verbatim}
+
+This command line produces the final stp file as \verb'foo.stp', and
+the intermediate files \verb'foo.ir' and \verb'foo.wp' for aiding
+explanation and understanding of the internals.  Remember that VinE
+uses its own IR to model the exact semantics of instructions in a
+simpler RISC-like form.  The IR and WP output files are in this IR
+language. If you aren't interested in these files, you can omit the
+\verb'-ir-out' and \verb'-wp-out' options.
+
+Intuitively, \texttt{appreplay} models the logic of the executed
+instructions, generating a path constraint needed to force the
+execution down the path taken in the trace.  A variable \verb'post' is
+introduced, which is the conjunction of the conditions seen along the
+path. In the file \verb'foo.ir', you can see this variable is assigned
+at each conditional branch points as $post = post \wedge condition$,
+where a condition is a variable modeling the compare operation's
+result that must be true to force execution to continue along the path
+taken. (Because the language is explicitly typed and \verb'appreplay'
+is careful to generate unique names, the full name of the \verb'post'
+variable is likely something like \verb'post_1034:reg1_t', where the
+part after the colon tells you it's a one-bit (boolean) variable.)
+
+This weakest precondition formula is then converted to the format of
+the STP solver's input.
+
+This  Vine utility  has several  options which  are detailed  later in
+Section~\ref {sec:utils}. The ones important here are:
+
+\begin {itemize}
+  \item \texttt{-trace} $\langle\text{\em file\/}\rangle$.
+  Specifies the trace input file.
+
+  \item \texttt{-use-thunks} $\langle\text{\em bool\/}\rangle$. For many
+  analyses in BitBlaze, the implicit effects of the instruction are
+  irrelevant.  It is sometimes not useful to generate complicated
+  side-effect VINE IR inline in the IR statements of instructions.
+  Instead, we can ask VinE to generate calls to these flag computation
+  IR ``thunk'' functions that model the flag operations.  In our case,
+  we do need the flags information to be present inline for the STP
+  formula generation to interpret implicit dependences between compare
+  and branch instructions. Hence, we have disabled the thunk
+  generation.
+
+  \item \texttt{-use-post-var} $\langle\text{\em bool\/}\rangle$.
+  If this is set to true, then 'assert' statements will be rewritten
+  to update a variable 'post', such that at the end of the trace
+  'post' will have value 1 iff all assertions would have passed.
+
+\end {itemize}
+

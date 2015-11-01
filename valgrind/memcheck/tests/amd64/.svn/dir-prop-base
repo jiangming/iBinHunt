@@ -1,0 +1,9 @@
+K 10
+svn:ignore
+V 38
+Makefile
+Makefile.in
+sse_memory
+.deps
+
+END

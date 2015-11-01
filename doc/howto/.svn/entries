@@ -1,0 +1,76 @@
+8
+
+dir
+504
+https://flyer.sis.smu.edu.sg/svn/code/dsta-vine/vine-2010-07-09/doc/howto
+https://flyer.sis.smu.edu.sg/svn/code/dsta-vine
+
+
+
+2010-07-09T09:00:27.836718Z
+504
+mengpan
+
+
+svn:special svn:externals svn:needs-lock
+
+howto.tex
+file
+
+
+
+
+2009-03-31T08:25:15.000000Z
+d8cc83053e4dbe761de57b60538a60ff
+2010-07-09T09:00:27.836718Z
+504
+mengpan
+
+utils.tex
+file
+
+
+
+
+2009-03-31T08:25:15.000000Z
+53f17bba485524267c9e92aa2c3c5e62
+2010-07-09T09:00:27.836718Z
+504
+mengpan
+
+stp.tex
+file
+
+
+
+
+2009-03-31T08:25:15.000000Z
+09af8bc85e5a19d7eae2e531b32aa8a7
+2010-07-09T09:00:27.836718Z
+504
+mengpan
+
+irformulagen.tex
+file
+
+
+
+
+2009-03-31T08:25:15.000000Z
+1ff75d7e1b47fe465f24c926a31d091a
+2010-07-09T09:00:27.836718Z
+504
+mengpan
+
+Makefile
+file
+
+
+
+
+2009-03-31T08:25:15.000000Z
+a0bae27006a3edea2c3fbdfd7e3a12e0
+2010-07-09T09:00:27.836718Z
+504
+mengpan
+

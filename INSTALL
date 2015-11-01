@@ -1,0 +1,225 @@
+# Owned and copyright BitBlaze, 2007. All rights reserved.
+# Do not copy, disclose, or distribute without explicit written
+# permission.
+
+
+*** Install File ****
+
+*************************
+** How to install VinE **
+*************************
+
+To install VinE do the following:
+  1) Install Valgrind's VEX library 
+       A particular version is required. See instructions below.
+  2) Install the rest of dependencies (See list and instructions below)
+
+  In vine/trunk do:
+  3) Run: './autogen.sh'
+  4) Run: './configure --with-vex=<your_path>/valgrind/VEX'
+  5) Run: 'make'
+
+Once you run configure it should complain if you forgot to 
+install any of the dependencies
+
+The above steps compile the VinE infrastructure in vine/trunk. 
+There is additional code in vine/projects.
+If you need any of those, then first install VinE as 
+above, then go to the specific project subdirectory 
+and run 'make'
+
+For a more tutorial/cookbook-style description of a simple installation,
+see doc/install-vine.sh.
+
+**************
+** Building **
+**************
+The above instructions assume a clean installation of VinE
+In general: 
+
+ run 'make' to build the basic stuff.
+ run 'make SUBPROJS=foo' to build project foo
+ run 'make SUBPROJS=foo debug-code' to build project foo with
+   debugging symbols (presumably to run under ocamldebug) &
+
+Note that some directories build debugging versions of the binaries
+by default when you run 'make'.
+Debugging binaries are attached a suffix .dbg 
+For example, appreplay.dbg is the debugging version of appreplay
+
+
+************************
+** Misc. Dependencies **
+************************
+This is a list of known dependencies: 
+  Valgrind's VEX library
+    Used for translating x86 to our Intermediate Representation (IR)
+  Binutils (GNU bfd and GNU iberty libraries)
+    Used for reading binary and object files
+  boost (and perhaps boost-devel)
+  gcc 4.0 or greater
+  Ocaml dependencies (a bunch of them. See below)
+
+
+****************************
+** Valgrind's VEX library **
+****************************
+We currently build off the valgrind SVN repository.  We know it will
+work against version 1749, as identified by:
+  cat VEX/priv/main/vex_svnversion.h
+
+The directions for getting the SVN version of valgrind are available
+from valgrind's home page.  Last time we checked, the steps are:
+
+  # checkout last known working valgrind
+  svn co -r6697 svn://svn.valgrind.org/valgrind/trunk valgrind
+
+  # revert to last known working VEX (IMPORTANT!)
+  pushd valgrind/VEX
+  svn up -r1749
+  popd
+
+  # build
+  cd valgrind
+  ./autogen.sh
+  ./configure
+  make
+
+There is no need to do 'make install'
+
+Make sure that in the valgrind/VEX directory there is a file called:
+libvex.a
+If not present or if you get the following error when compiling VinE:
+  /usr/bin/ld: cannot find -lvex
+  collect2: ld returned 1 exit status
+  make[2]: *** [disassembler] Error 1
+
+then go to the valgrind/VEX directory and type 'make'. This should 
+build libvex.a
+
+
+If you get an error that says there is an undefined reference to
+'__stack_chk_fail', either you need to reconfigure with gcc set to
+disable stack protection, or you have compiled part of the code 
+with the stack protector and part without it, in which case you 
+might have to enable it to finish compilation.
+You can enable/disable the stack protector in gcc in the following way:
+Disable: ./configure CC="gcc -fno-stack-protector" 
+Enable: ./configure CC="gcc -fstack-protector"
+Doing make clean first, will ensure that the whole platform gets 
+compiled with the same flag
+
+
+************************
+** OCAML Dependencies **
+************************
+
+We use ocaml. The ocaml part of our code has the following requirements
+
+Note: The following instructions assume use of Ubuntu/Debian 
+(or at least the apt package manager)
+VinE users may run other distributions (Fedora, Slackware...)
+Most packages should be available using other package managers such as 
+yum, but if they are not, then you'll need to download the source files 
+for the libraries and compile from source.
+
+
+Requirements:
+ - ocaml compiler
+	apt-get install ocaml
+	or see http://caml.inria.fr/download.en.html
+
+
+ - ocamlfind
+	apt-get install ocaml-findlib
+	or get sources at http://www.ocaml-programming.de/packages/
+
+	DJB installed it as follows:
+	$ ./configure -bindir /usr/bin -mandir /usr/share/man -sitelib
+	/usr/lib/ocaml
+	$ make
+	$ make install
+
+	(You need ocamlp4 to install ocamlfind. yum install camlp4
+	worked for DJB. If you didn't give the -sitelib option during
+	make, you must edit /usr/etc/findlib.conf and add
+	/usr/lib/ocaml to the path configuration, e.g.,
+	path="/usr/lib/ocaml/:/usr/lib/ocaml/site-lib")
+
+
+ - gdome bindings for ocaml
+	 apt-get install libgdome2-ocaml-dev
+	 or install from 
+	 http://sourceforge.net/projects/gmetadom/
+	 You may also have to install gdome2-devel.  Note that the
+	 ocamlfind looks for /usr/lib/ocaml/gdome2/META on my (djb's)
+	 system, so if the binary rpm doesn't install that file you
+	 should build from source.
+
+
+ - ocamlidl 
+	apt-get install camlidl (or ocaml-core will bring it in)
+	or http://caml.inria.fr/camlidl/
+
+ - ocamlgraph
+	We require ocamlgraph 0.99c or newer because some functions have 
+	slightly different prototypes in previous versions and you'll get
+	some compilation errors otherwise.
+	You can get it from: http://ocamlgraph.lri.fr/
+	NOTE: there is a bug in Makefile. When you run make install-findlib, 
+        it looks for *.mli files in the current directory, rather than the 
+ 	src directory. So change Makefile accordingly.
+
+	Alternatively use:
+	apt-get install libocamlgraph-ocaml-dev
+	  but make sure the version is 0.99c or newer
+
+ - extlib
+	apt-get install libextlib-ocaml-dev
+	or http://ocaml-lib.sourceforge.net/
+
+ - ocaml-sqlite3
+	To install ocaml-sqlite3 you might need to install first:
+	  libsqlite3-dev, sqlite3, and libsqlite3-0
+
+	apt-get install sqlite3
+	apt-get install libsqlite3-0
+	apt-get install libsqlite3-dev
+	apt-get install libsqlite3-ocaml-dev
+	Note that ocaml-sqlite may not work since the database format 
+	in sqlite3 is different than sqlite.
+
+	ocaml-sqlite3 is available from:
+	http://ocaml.info/home/ocaml_sources.html#ocaml-sqlite3
+	We have tested this against version 0.18.0
+
+*******************
+** Miscellaneous **
+*******************
+
+If parsing large XML files, you will want to patch libxml2. Edit
+parser.c and set xmlParserMaxDepth to something big enough. (How
+deeply nested is your XML?)
+
+Using stuff:
+
+parsexml will by default parse an XML file, and print the result in
+"human readable" form. With the -marshal option you can tell it to
+marshal the parsed IR to a file.  You can then run appreplay -m on the
+marshaled file to avoid reparsing it.  Note that marshaled output is
+only guaranteed to be readable by the same version of ocaml that
+produced it, so when commiting it to the repository it is probably a
+good idea to have the version number in the name or something.
+
+
+****************************************
+** Optional: Making the documentation **
+****************************************
+Optionally you can also make the documentation by running:
+'make doc' in vine/trunk
+The documentation can be built into a PDF or PS via latex, or into
+html via 'hevea'
+(http://pauillac.inria.fr/~maranget/hevea/index.html). 
+hevea requires ocaml to be installed.
+
+

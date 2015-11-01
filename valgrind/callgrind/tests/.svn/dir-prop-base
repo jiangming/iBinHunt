@@ -1,0 +1,17 @@
+K 10
+svn:ignore
+V 120
+callgrind.out.*
+clreq
+simwork
+threads
+.deps
+Makefile
+Makefile.in
+*.stderr.diff
+*.stderr.out
+*.stdout.diff
+*.stdout.out
+
+
+END

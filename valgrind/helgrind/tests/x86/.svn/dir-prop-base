@@ -1,0 +1,9 @@
+K 10
+svn:ignore
+V 54
+*.stderr.diff
+*.stderr.out
+*.stdout.diff
+*.stdout.out
+
+END

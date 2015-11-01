@@ -1,0 +1,9 @@
+You must first create all necessary input files using programs in the preprocess directory.
+Then, run bindiff with the following four arguments (in the order listed):
+
+(1) ir__<inputfilename1>
+(2) ir__<inputfilename2>
+(3) fun_matchings__<DGsqlitename>
+(4) block_matchings__<DGsqlitename>
+
+Debugging and other useful information will be output to files in the debug directory.

@@ -1,0 +1,28 @@
+8
+
+dir
+512
+https://flyer.sis.smu.edu.sg/svn/code/dsta-vine/vine-2010-07-09/config
+https://flyer.sis.smu.edu.sg/svn/code/dsta-vine
+
+
+
+2010-07-10T08:43:50.607608Z
+512
+mengpan
+
+
+svn:special svn:externals svn:needs-lock
+
+recursive.mk
+file
+
+
+
+
+2009-03-31T08:25:26.000000Z
+15bb72e4f3b6aaf58d24b6619ae9e730
+2010-07-10T08:43:50.607608Z
+512
+mengpan
+

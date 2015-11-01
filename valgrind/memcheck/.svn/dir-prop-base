@@ -1,0 +1,13 @@
+K 10
+svn:ignore
+V 114
+.deps
+Makefile
+Makefile.in
+memcheck-amd64-linux
+memcheck-ppc32-linux
+memcheck-ppc64-linux
+memcheck-x86-linux
+*.so
+
+END

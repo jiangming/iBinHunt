@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/patches
+END
+VEX_3_2_3_setjmp.diff
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/patches/VEX_3_2_3_setjmp.diff
+END
+vex-pushfw-popfw.diff
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/code/dsta-vine/!svn/ver/504/vine-2010-07-09/libasmir/patches/vex-pushfw-popfw.diff
+END

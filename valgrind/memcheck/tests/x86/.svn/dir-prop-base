@@ -1,0 +1,21 @@
+K 10
+svn:ignore
+V 183
+.deps
+fpeflags
+Makefile
+Makefile.in
+pushfpopf
+scalar
+scalar_exit_group
+scalar_fork
+scalar_supp
+scalar_vfork
+sse_memory
+*.stderr.diff*
+*.stderr.out
+*.stdout.diff
+*.stdout.out
+tronical
+
+END

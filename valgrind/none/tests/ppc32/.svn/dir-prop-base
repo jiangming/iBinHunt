@@ -1,0 +1,15 @@
+K 10
+svn:ignore
+V 102
+.deps
+Makefile
+Makefile.in
+jm-insns
+lsw
+testVMX
+*.stderr.diff
+*.stderr.out
+*.stdout.diff
+*.stdout.out
+
+END

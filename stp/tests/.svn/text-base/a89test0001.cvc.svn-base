@@ -1,0 +1,23 @@
+%% Regression level = 3
+%% Result = InValid
+%% Language = presentation
+
+filter: ARRAY BITVECTOR(32) OF BITVECTOR(8);
+mem: ARRAY BITVECTOR(32) OF BITVECTOR(8);
+%----------------------------------------------------
+ASSERT ((((filter[0bin00000000000000000000000000000111] 
+    @ filter[0bin00000000000000000000000000000110]) 
+   @ filter[0bin00000000000000000000000000000101]) 
+  @ filter[0bin00000000000000000000000000000100]) 
+ = 0bin00000000000000000000000000000011);
+ASSERT (LET cvcl_0 = ((filter[0bin00000000000000000000000000000011])
+               [5:0] @ filter[0bin00000000000000000000000000000010] 
+               @ filter[0bin00000000000000000000000000000001] 
+               @ filter[0bin00000000000000000000000000000000] 
+               @ 0bin00)
+ IN NOT (BVLE(0bin00000000000000000000000000000000
+              ,cvcl_0) AND BVLE(cvcl_0,0bin00000000000000000000000000111111)));
+
+%----------------------------------------------------
+QUERY FALSE;
+COUNTEREXAMPLE;

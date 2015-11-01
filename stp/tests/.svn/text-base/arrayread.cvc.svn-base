@@ -1,0 +1,13 @@
+%% Regression level = 0
+%% Result = InValid
+%% Runtime = 1
+%% Language = presentation
+
+f: ARRAY BITVECTOR(2) OF BITVECTOR(4);
+g: ARRAY BITVECTOR(4) OF BITVECTOR(4);
+%----------------------------------------------------
+ASSERT (f[0bin00] = f[0bin01]);
+ASSERT (g[0bin0000] = f[0bin01]);
+%----------------------------------------------------
+QUERY FALSE;
+COUNTEREXAMPLE;

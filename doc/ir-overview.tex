@@ -1,0 +1,84 @@
+
+\subsection{\vine Internal Representation (IR)}
+
+\input{ir-syntax}
+
+Our IR is shown in Table~\ref{tab:irsyntax}. Our IR consists of
+statements (stmt) and expressions (exp).  Expressions are pure, i.e.,
+side-effect free. One thing to note is that both jumps ({\tt Jmp}) and
+conditional jumps ({\tt CJmp}) have targets that are expressions, not
+necessarily labels.  That is because the jump target may be indirect,
+i.e., calculated via an expression.~\footnote{One may wonder why we
+have {\tt Label} and {\tt Name}. Both name a location in the
+program. The reason we need {\tt Name} as an expression is because
+jump targets should be expressions, i.e., they may be calculated, or
+they may be a known location given by {\tt Name}. However, we want
+program locations to be ``higher level'' than expressions, so we also
+have {\tt Label}. Thus, we have {\tt Name} of {\tt Label}, i.e., an
+expression containing a statement. This may seem weird, but since {\tt
+Label} has no side effects, it still is at least consistent in some
+respect.}.
+
+Statements in our language are:
+\begin{itemize}\squish
+
+\item {\tt Jmp}({\it exp}) - {\tt Jmp} is an unconditional jump. {\it
+  exp} is the jump target. If {\it exp} is of type {\tt Name}, then
+  the jump is to a known location, i.e., a direct jump.  If {\it exp}
+  is not of type {\tt Name}, then the jump is indirect.
+
+\item {\tt CJmp}({\it exp}, {\it true\_exp\_target}, {\it
+  false\_exp\_target}) - {\tt CJmp} is a conditional jump.  {\it exp}
+  is evaluated, and if true, control is transfered to {\it
+  true\_exp\_target}, else control is tranfered to {\it
+  false\_exp\_target}.  When constructing a {\tt CJmp}, {\it exp}
+  should evaluate to type bool, though we do not explicitly
+  check. {\it true\_exp\_target} and {\it false\_exp\_target} are
+  similar to the expression in {\tt Jmp}: if they are of type {\it
+  Name}, then the jump target is known, else the jump target is
+  indirect. Note that in binaries, usually {\it false\_exp\_target}
+  will be a fall-through address, thus a known location, thus a {\tt
+  Name}.
+
+\item {\tt Move}({\it lhs\_exp}, {\it rhs\_exp}) - {\tt Move} is our
+  assignment statement {\it lhs\_exp} := {\it rhs\_exp}. {\tt Move} is
+  used for both load and store, i.e, if {\it lhs\_exp} is a {\tt Mem},
+  then the {\tt Move} is a store to memory, and if {\it lhs\_exp} is
+  a {\tt Temp}, then this is a load.
+
+\item {\tt Call}({\it lvalue option}, {\it var}, {\it exp list}) - calls
+  the function named by {\it id} with arguments {\it exp list}. The
+  call can optionally return a value. Functions with no return have
+  {\tt None} as the {\it lvalue option}, otherwise will have {\tt
+  Some(x)} where the statement can be read as {\tt x = id(arg1, arg2,
+  ... ,argn)}.
+
+\item {\tt Function}({\it var},  {\it typ}, {\it decl list}, {\it
+  bool}, {\it stmt option}) - if {\it bool} is false, this is an
+  external function.  If {\it stmt option} = {\tt None}, then this is
+  a declaration. If {\it stmt option} = {\tt Some}, then this is a
+  function definition.  The function name is {\it var}, with return
+  type {\it typ}, and formal arguments named by {\it decl list}. We
+  require formals to have names and types, unlike C (which just
+  requires the types).
+
+\item {\tt Special}({\it string}) - {\tt Special} are for
+  instructions that change the processor state, such as halt,
+  interrupts, etc.  The {\it string} is the x86 instruction name. 
+
+\item {\tt Label}({\it exp}) - A label is an abstract location in the
+  program, e.g., the beginning of a basic block. Labels serve as
+  targets for jumps (both {\tt Jmp} and {\tt CJmp}).  Direct jumps
+  will have {\it exp} be a {\sc Name}, while indirect jumps will have
+  some arithmetic expression. Labels have no effect on execution.
+
+\item {\tt ExpStmt}({\it exp}) - An {\tt ExpStmt} is a statement which
+  executes an expression, then throws away the result. {\tt ExpStmt}
+  is useful for anaysis: you will not see a direct translation of an
+  x86 instruction to {\tt ExpStmt}.
+
+\item {\tt Comment}({\it string}) - A {\tt Comment} is a user-written
+  comment in the code. Comments may be inserted by analysis, during
+  translation, etc, and are used to make the code more
+  readable. Comments have no effect on execution.
+\end{itemize}

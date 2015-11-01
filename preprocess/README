@@ -1,0 +1,11 @@
+Programs in the preprocess directory are used to create the input files to the bindiff program.
+You must do the following:
+
+(1) ./convert <input_idadb_1>
+(2) ./convert <input_idadb_2>
+(3) ./fromDG <DarunGrim sqlite output database
+
+
+convert expects an IDAPro database (exported using the VinE plugin) as input.  It creates the output file ir__<inputfilename>.  This is a file containing the VinE IR of a particular binary and will be used as input to bindiff.
+
+fromDG expects an sqlite database (created from the DarunGrim syntactic difference finder) as input.  It creates two files: fun_matchings__<inputfilename> and block_matchings__<inputfilename>.  These files, respectively, contains the syntactic function and block matching information.  They are used as input to bindiff.

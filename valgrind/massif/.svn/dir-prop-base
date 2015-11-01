@@ -1,0 +1,13 @@
+K 10
+svn:ignore
+V 106
+.deps
+Makefile
+Makefile.in
+massif-amd64-linux
+massif-ppc32-linux
+massif-ppc64-linux
+massif-x86-linux
+*.so
+
+END
