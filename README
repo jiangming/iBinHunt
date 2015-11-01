@@ -1,5 +1,13 @@
-# Owned and copyright BitBlaze, 2007. All rights reserved.
-# Do not copy, disclose, or distribute without explicit written
-# permission.
+Techniques have been proposed to find the semantic differ-
+ences between two binary programs when the source code is not available.
+Analyzing control flow, and in particular, intra-procedural control flow,
+has become an attractive technique in the latest binary diffing tools since
+it is more resistant to syntactic, but non-semantic, differences. However,
+this makes such techniques vulnerable to simple function obfuscation
+techniques (e.g., function inlining) attackers any malware writers could
+use. In this paper, we first show function obfuscation as an attack to
+such binary diffing techniques, and then propose iBinHunt which uses
+deep taint and automatic input generation to find semantic differences
+in inter-procedural control flows.
 
-See INSTALL
+[ICISC 2012] Jiang Ming, Meng Pan and Debin Gao, iBinHunt: Binary Hunting with Inter-Procedural Control Flow, In Proceedings of the 15th Annual International Conference on Information Security and Cryptology, Seoul, Korea, November 28 ¨C 30, 2012
