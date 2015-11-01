@@ -10,4 +10,4 @@ such binary diffing techniques, and then propose iBinHunt which uses
 deep taint and automatic input generation to find semantic differences
 in inter-procedural control flows.
 
-[ICISC 2012] Jiang Ming, Meng Pan and Debin Gao, iBinHunt: Binary Hunting with Inter-Procedural Control Flow, In Proceedings of the 15th Annual International Conference on Information Security and Cryptology, Seoul, Korea, November 28 ¨C 30, 2012
+[ICISC 2012] Jiang Ming, Meng Pan and Debin Gao, iBinHunt: Binary Hunting with Inter-Procedural Control Flow, In Proceedings of the 15th Annual International Conference on Information Security and Cryptology, Seoul, Korea, November 28 - 30, 2012
